@@ -1,0 +1,15 @@
+samvidhan-mitra/
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   ├── package.json
+│   └── README.md
+├── backend/
+│   ├── controllers/
+│   ├── models/
+│   ├── routes/
+│   ├── app.js
+│   ├── package.json
+│   └── README.md
+├── .gitignore
+└── README.md
