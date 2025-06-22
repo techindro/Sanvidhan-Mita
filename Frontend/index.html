@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>संविधान ज्ञान - भारतीय संविधान शिक्षा मंच</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2b58a4;
+            --secondary: #f26c4f;
+            --accent: #ffc107;
+            --dark: #1a237e;
+            --light: #f5f5f5;
+            --success: #4caf50;
+            --danger: #f44336;
+            --text: #333333;
+            --text-light: #666666;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Nirmala UI', 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, var(--dark), var(--primary));
+            color: white;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #e0553a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Language Toggle */
+        .language-toggle {
+            display: flex;
+            gap: 5px;
+            margin-left: 10px;
+        }
+
+        .language-toggle button {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .language-toggle button:disabled {
+            background-color: rgba(255,255,255,0.2);
+            cursor: default;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1589391886645-d51941baf7fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Features Section */
+        .section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+            color: var(--dark);
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--primary);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        /* Courses Section */
+        .courses {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .course-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .course-img {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .course-content {
+            padding: 20px;
+        }
+
+        .course-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .course-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .course-btn {
+            width: 100%;
+            text-align: center;
+            padding: 10px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background-color: var(--light);
+        }
+
+        .testimonial-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin: 15px;
+            position: relative;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .testimonial-text:before {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            top: -20px;
+            left: -15px;
+            color: rgba(0,0,0,0.1);
+            font-family: serif;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .testimonial-author img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+
+        .author-info h4 {
+            color: var(--dark);
+        }
+
+        .author-info p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Stats Section */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-item {
+            background-color: white;
+            padding: 30px 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        /* Current Affairs */
+        .current-affairs {
+            background-color: var(--dark);
+            color: white;
+            padding: 40px 0;
+        }
+
+        .news-ticker {
+            background-color: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 30px;
+            overflow: hidden;
+        }
+
+        .ticker-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: scroll 30s linear infinite;
+            padding-left: 100%;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .ticker-item {
+            display: inline-block;
+            margin-right: 40px;
+        }
+
+        .ticker-item:before {
+            content: '•';
+            margin-right: 10px;
+            color: var(--accent);
+        }
+
+        /* Quiz Section */
+        .quiz-section {
+            background-color: var(--light);
+        }
+
+        .quiz-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+
+        .quiz-question {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .quiz-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .quiz-option {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .quiz-option:hover {
+            background-color: #e9e9e9;
+        }
+
+        .quiz-option.selected {
+            background-color: #e8f5e9;
+            border-left-color: var(--success);
+        }
+
+        .quiz-option.incorrect {
+            background-color: #ffebee;
+            border-left-color: var(--danger);
+        }
+
+        .quiz-explanation {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e8f5e9;
+            border-radius: 4px;
+            display: none;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .footer-about {
+            margin-bottom: 20px;
+        }
+
+        .footer-links h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-links h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--secondary);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #cccccc;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: #aaaaaa;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 50px auto;
+            max-width: 500px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 20px;
+            position: relative;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #dddddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(43, 88, 164, 0.2);
+        }
+
+        .modal-footer {
+            padding: 20px;
+            background-color: #f9f9f9;
+            text-align: right;
+            border-top: 1px solid #eeeeee;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                padding: 20px 0;
+            }
+            
+            .nav.active {
+                display: flex;
+            }
+            
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section {
+                padding: 40px 0;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .feature-card, .course-card, .quiz-card {
+                padding: 20px;
+            }
+            
+            .modal-content {
+                margin: 20px auto;
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <img src="https://via.placeholder.com/50x50" alt="Logo">
+                संविधान ज्ञान
+            </a>
+            
+            <div style="display: flex; align-items: center;">
+                <div class="language-toggle">
+                    <button onclick="setLanguage('hi')" disabled>हिन्दी</button>
+                    <button onclick="setLanguage('en')">English</button>
+                </div>
+                
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <nav class="nav" id="mainNav">
+                <a href="#" class="nav-link">होम</a>
+                <a href="#" class="nav-link">पाठ्यक्रम</a>
+                <a href="#" class="nav-link">करंट अफेयर्स</a>
+                <a href="#" class="nav-link">संविधान</a>
+                <a href="#" class="nav-link">प्रश्नोत्तरी</a>
+                <a href="#" class="nav-link">ब्लॉग</a>
+                <a href="#" class="btn btn-outline">लॉगिन</a>
+                <a href="#" class="btn btn-primary">रजिस्टर</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero-title">भारतीय संविधान को समझें, अपने अधिकारों को जानें</h1>
+            <p class="hero-subtitle">हर भारतीय नागरिक के लिए संविधान की शिक्षा - बच्चों से लेकर व्यापारियों तक। महिला सुरक्षा, भ्रष्टाचार, और जातिवाद के खिलाफ जागरूकता।</p>
+            <div class="hero-buttons">
+                <a href="#" class="btn btn-primary">मुफ्त पाठ्यक्रम</a>
+                <a href="#" class="btn btn-outline">लाइव कक्षाएं</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">हमारे विशेष लाभ</h2>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="feature-title">विशेषज्ञ शिक्षक</h3>
+                    <p>संविधान विशेषज्ञों द्वारा पढ़ाया गया, सरल भाषा में जटिल अवधारणाओं को समझाया गया</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3 class="feature-title">विस्तृत अध्ययन सामग्री</h3>
+                    <p>PDF नोट्स, वीडियो लेक्चर, ऑडियो सारांश और इंटरैक्टिव क्विज़ के साथ</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <h3 class="feature-title">लाइव और रिकॉर्डेड कक्षाएं</h3>
+                    <p>अपनी सुविधानुसार लाइव कक्षाओं में भाग लें या रिकॉर्डेड वीडियो देखें</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h3 class="feature-title">संदेह समाधान</h3>
+                    <p>24x7 उपलब्ध शिक्षकों और AI सहायक के साथ अपने सभी प्रश्नों के उत्तर प्राप्त करें</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="feature-title">प्रगति ट्रैकिंग</h3>
+                    <p>विस्तृत विश्लेषण और प्रगति रिपोर्ट के साथ अपने सीखने को ट्रैक करें</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="feature-title">मोबाइल अनुकूल</h3>
+                    <p>किसी भी डिवाइस पर कहीं भी, कभी भी सीखें - ऑफलाइन मोड उपलब्ध</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section class="section" style="background-color: #f5f7fa;">
+        <div class="container">
+            <h2 class="section-title">हमारे लोकप्रिय पाठ्यक्रम</h2>
+            
+            <div class="courses">
+                <div class="course-card">
+                    <div class="course-img" style="background-image: url('https://images.unsplash.com/photo-1589391886645-d51941baf7fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="course-content">
+                        <h3 class="course-title">मौलिक अधिकार</h3>
+                        <div class="course-meta">
+                            <span><i class="far fa-bookmark"></i> 12 पाठ</span>
+                            <span><i class="far fa-clock"></i> 4 घंटे</span>
+                        </div>
+                        <a href="#" class="course-btn">अभी शुरू करें</a>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-img" style="background-image: url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="course-content">
+                        <h3 class="course-title">भ्रष्टाचार विरोधी कानून</h3>
+                        <div class="course-meta">
+                            <span><i class="far fa-bookmark"></i> 8 पाठ</span>
+                            <span><i class="far fa-clock"></i> 3 घंटे</span>
+                        </div>
+                        <a href="#" class="course-btn">अभी शुरू करें</a>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-img" style="background-image: url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="course-content">
+                        <h3 class="course-title">महिला सुरक्षा अधिकार</h3>
+                        <div class="course-meta">
+                            <span><i class="far fa-bookmark"></i> 10 पाठ</span>
+                            <span><i class="far fa-clock"></i> 3.5 घंटे</span>
+                        </div>
+                        <a href="#" class="course-btn">अभी शुरू करें</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="#" class="btn btn-primary">सभी पाठ्यक्रम देखें</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="section">
+        <div class="container">
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">50,000+</div>
+                    <div>सक्रिय शिक्षार्थी</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-number">1,200+</div>
+                    <div>वीडियो लेक्चर</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-number">5,000+</div>
+                    <div>प्रश्नोत्तरी</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div>सहायता उपलब्ध</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Current Affairs -->
+    <section class="current-affairs">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 20px; color: white;">आज का करंट अफेयर्स</h2>
+            
+            <div class="news-ticker">
+                <div class="ticker-content">
+                    <span class="ticker-item">सुप्रीम कोर्ट ने महिला सुरक्षा पर नए दिशानिर्देश जारी किए</span>
+                    <span class="ticker-item">संसद में नया डिजिटल इंडिया बिल पेश हुआ</span>
+                    <span class="ticker-item">हाई कोर्ट ने भ्रष्टाचार मामले में फैसला सुनाया</span>
+                    <span class="ticker-item">महिला सशक्तिकरण योजनाओं में 25% वृद्धि</span>
+                    <span class="ticker-item">संवैधानिक जागरूकता अभियानों में रिकॉर्ड भागीदारी</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiz Section -->
+    <section class="section quiz-section">
+        <div class="container">
+            <h2 class="section-title">नमूना प्रश्नोत्तरी</h2>
+            
+            <div class="quiz-card">
+                <div class="quiz-question">
+                    भारतीय संविधान में कुल कितने मौलिक अधिकार हैं?
+                </div>
+                
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectOption(this, false)">A) 5 मौलिक अधिकार</div>
+                    <div class="quiz-option" onclick="selectOption(this, true)">B) 6 मौलिक अधिकार</div>
+                    <div class="quiz-option" onclick="selectOption(this, false)">C) 7 मौलिक अधिकार</div>
+                    <div class="quiz-option" onclick="selectOption(this, false)">D) 8 मौलिक अधिकार</div>
+                </div>
+                
+                <div class="quiz-explanation" id="quizExplanation">
+                    <strong>✅ सही उत्तर: B) 6 मौलिक अधिकार</strong><br><br>
+                    <p>भारतीय संविधान में 6 मौलिक अधिकार हैं:</p>
+                    <ol>
+                        <li>समानता का अधिकार (अनुच्छेद 14-18)</li>
+                        <li>स्वतंत्रता का अधिकार (अनुच्छेद 19-22)</li>
+                        <li>शोषण के विरुद्ध अधिकार (अनुच्छेद 23-24)</li>
+                        <li>धर्म की स्वतंत्रता का अधिकार (अनुच्छेद 25-28)</li>
+                        <li>संस्कृति और शिक्षा संबंधी अधिकार (अनुच्छेद 29-30)</li>
+                        <li>संवैधानिक उपचारों का अधिकार (अनुच्छेद 32)</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div style="text-align: center;">
+                <a href="#" class="btn btn-primary">अधिक प्रश्नोत्तरी देखें</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section testimonials">
+        <div class="container">
+            <h2 class="section-title">हमारे शिक्षार्थियों की राय</h2>
+            
+            <div class="features">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        इस प्लेटफॉर्म ने मुझे संविधान को समझने में बहुत मदद की। विशेषज्ञ शिक्षकों द्वारा सरल भाषा में समझाया गया। अब मैं अपने अधिकारों के बारे में जागरूक हूं।
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/42.jpg" alt="Student">
+                        <div class="author-info">
+                            <h4>प्रिया शर्मा</h4>
+                            <p>छात्रा, दिल्ली विश्वविद्यालय</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        एक व्यवसायी के रूप में, मैं कानूनी जानकारी को समझने में हमेशा संघर्ष करता था। यह प्लेटफॉर्म मेरे लिए वरदान साबित हुआ है। अब मैं बेहतर तरीके से अनुपालन कर सकता हूं।
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Businessman">
+                        <div class="author-info">
+                            <h4>राजीव गुप्ता</h4>
+                            <p>उद्यमी, मुंबई</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        महिला सुरक्षा पाठ्यक्रम ने मुझे अपने अधिकारों और कानूनी सुरक्षा उपायों के बारे में सिखाया। अब मैं अधिक आत्मविश्वास महसूस करती हूं और दूसरों को भी शिक्षित करती हूं।
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Homemaker">
+                        <div class="author-info">
+                            <h4>सुमन देवी</h4>
+                            <p>गृहिणी, बेंगलुरु</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section" style="background-color: var(--primary); color: white; text-align: center;">
+        <div class="container">
+            <h2 style="font-size: 2rem; margin-bottom: 20px;">अपने संवैधानिक अधिकारों को जानने के लिए तैयार हैं?</h2>
+            <p style="max-width: 700px; margin: 0 auto 30px; font-size: 1.1rem;">आज ही निःशुल्क खाता बनाएं और भारतीय संविधान की गहरी समझ प्राप्त करें</p>
+            <a href="#" class="btn" style="background-color: white; color: var(--primary); font-size: 1.1rem; padding: 12px 30px;">अभी रजिस्टर करें</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <a href="#" class="footer-logo">संविधान ज्ञान</a>
+                    <p>हर भारतीय नागरिक के लिए संविधान शिक्षा मंच। हमारा उद्देश्य संवैधानिक जागरूकता फैलाना और एक जागरूक समाज का निर्माण करना है।</p>
+                    
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>लिंक्स</h3>
+                    <ul>
+                        <li><a href="#">होम</a></li>
+                        <li><a href="#">हमारे बारे में</a></li>
+                        <li><a href="#">पाठ्यक्रम</a></li>
+                        <li><a href="#">शिक्षक</a></li>
+                        <li><a href="#">ब्लॉग</a></li>
+                        <li><a href="#">संपर्क करें</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>पाठ्यक्रम</h3>
+                    <ul>
+                        <li><a href="#">मौलिक अधिकार</a></li>
+                        <li><a href="#">राज्य के नीति निर्देशक तत्व</a></li>
+                        <li><a href="#">महिला सुरक्षा कानून</a></li>
+                        <li><a href="#">भ्रष्टाचार विरोधी कानून</a></li>
+                        <li><a href="#">संविधान संशोधन</a></li>
+                        <li><a href="#">मौलिक कर्तव्य</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>सहायता</h3>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">गोपनीयता नीति</a></li>
+                        <li><a href="#">शर्तें और नियम</a></li>
+                        <li><a href="#">भुगतान विकल्प</a></li>
+                        <li><a href="#">संदेह समाधान</a></li>
+                        <li><a href="#">करियर</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 संविधान ज्ञान. सर्वाधिकार सुरक्षित।</p>
+                <p>"संविधान केवल वकीलों का दस्तावेज नहीं है, यह जीवन का वाहक है, और इसकी भावना हमेशा युग की भावना है" - डॉ. बी.आर. अम्बेडकर</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">लॉग इन</h3>
+                <span class="close-modal" onclick="closeModal('loginModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label class="form-label">ईमेल या मोबाइल नंबर</label>
+                        <input type="text" class="form-control" placeholder="अपना ईमेल या मोबाइल नंबर दर्ज करें">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">पासवर्ड</label>
+                        <input type="password" class="form-control" placeholder="अपना पासवर्ड दर्ज करें">
+                    </div>
+                    
+                    <div style="text-align: right; margin-bottom: 20px;">
+                        <a href="#" style="color: var(--primary); text-decoration: none;">पासवर्ड भूल गए?</a>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">लॉग इन</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <p style="margin: 0; text-align: center;">खाता नहीं है? <a href="#" style="color: var(--primary); text-decoration: none; font-weight: 600;">रजिस्टर करें</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal" id="signupModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">नया खाता बनाएं</h3>
+                <span class="close-modal" onclick="closeModal('signupModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label class="form-label">पूरा नाम</label>
+                        <input type="text" class="form-control" placeholder="अपना पूरा नाम दर्ज करें">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">ईमेल</label>
+                        <input type="email" class="form-control" placeholder="अपना ईमेल दर्ज करें">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">मोबाइल नंबर</label>
+                        <input type="tel" class="form-control" placeholder="अपना मोबाइल नंबर दर्ज करें">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">पासवर्ड</label>
+                        <input type="password" class="form-control" placeholder="एक मजबूत पासवर्ड बनाएं">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">उपयोगकर्ता प्रकार</label>
+                        <select class="form-control">
+                            <option value="">चुनें कि आप कौन हैं</option>
+                            <option>छात्र/छात्रा</option>
+                            <option>कार्यरत पेशेवर</option>
+                            <option>व्यापारी/उद्यमी</option>
+                            <option>गृहिणी</option>
+                            <option>सरकारी कर्मचारी</option>
+                            <option>शिक्षक</option>
+                            <option>अन्य</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">रजिस्टर करें</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <p style="margin: 0; text-align: center;">पहले से ही खाता है? <a href="#" style="color: var(--primary); text-decoration: none; font-weight: 600;">लॉग इन करें</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+        });
+        
+        // Quiz Functionality
+        function selectOption(option, isCorrect) {
+            const options = document.querySelectorAll('.quiz-option');
+            options.forEach(opt => {
+                opt.classList.remove('selected', 'incorrect');
+            });
+            
+            option.classList.add(isCorrect ? 'selected' : 'incorrect');
+            
+            if (!isCorrect) {
+                // Find and highlight the correct answer
+                options.forEach(opt => {
+                    if (opt.textContent.includes('B) 6 मौलिक अधिकार')) {
+                        opt.classList.add('selected');
+                    }
+                });
+            }
+            
+            document.getElementById('quizExplanation').style.display = 'block';
+        }
+        
+        // Modal Functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target.className === 'modal') {
+                event.target.style.display = 'none';
+            }
+        });
+        
+        // Language Toggle Function
+        function setLanguage(lang) {
+            document.documentElement.lang = lang; // <html lang=""> update
+            // You would add more language switching logic here
+            // For now, just toggle the button states
+            document.querySelectorAll('.language-toggle button').forEach(btn => {
+                btn.disabled = (btn.textContent === (lang === 'hi' ? 'हिन्दी' : 'English'));
+            });
+            
+            // In a real implementation, you would:
+            // 1. Load language-specific content
+            // 2. Update all text elements on the page
+            // 3. Possibly store the preference in localStorage
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set default language to Hindi
+            setLanguage('hi');
+            
+            // Add click event to all course buttons
+            document.querySelectorAll('.course-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('Course enrollment functionality would go here');
+                });
+            });
+            
+            // Add click event to login/register buttons in nav
+            document.querySelectorAll('.nav .btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const modalId = this.classList.contains('btn-primary') ? 'signupModal' : 'loginModal';
+                    openModal(modalId);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
