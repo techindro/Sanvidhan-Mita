@@ -57,7 +57,6 @@ An educational platform for learning about the Indian Constitution in Hindi and 
  cd ../frontend
  npm install
  cp .env.example .env
-# Update .env with your API URL
 
 # Run the application 
  cd../backend
