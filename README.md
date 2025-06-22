@@ -47,3 +47,22 @@ An educational platform for learning about the Indian Constitution in Hindi and 
    ```bash
    git clone https://github.com/your-username/samvidhan-gyan.git
    cd samvidhan-gyan
+2. **Setup Backend**
+ cd backend
+ npm install
+ cp .env.example .env
+# Update .env with your credentials
+
+3. **Set up frontend**
+ cd ../frontend
+ npm install
+ cp .env.example .env
+# Update .env with your API URL
+
+# Run the application 
+ cd../backend
+ npm run server
+
+ cd../frontend
+ npm start
+
