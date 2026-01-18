@@ -1,4 +1,4 @@
-# Sanvidhan-Mita
+# Sanvidhan-Mitra
 # संविधान ज्ञान (Constitution Knowledge)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
