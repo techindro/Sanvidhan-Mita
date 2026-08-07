@@ -7,15 +7,24 @@ function TopStrip({ lang, setLang }) {
   return (
     <div className="drishti-top-strip">
       <div>
-        <span>📞 हेल्पलाइन: 1800-200-1010 | ✉️ ईमेल: support@sanvidhanmitra.in</span>
+        <span>हेल्पलाइन: 1800-200-1010 | ईमेल: support@sanvidhanmitra.in</span>
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
         <span>संविधान अध्ययन एवं नागरिक जागरूकता मंच</span>
         <button className="lang-toggle-btn" onClick={() => setLang(l => (l === 'hi' ? 'en' : 'hi'))}>
-          🌐 {lang === 'hi' ? 'English' : 'हिंदी'}
+          {lang === 'hi' ? 'English' : 'हिंदी'}
         </button>
       </div>
     </div>
+  );
+}
+
+function SearchIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="search-icon-svg">
+      <circle cx="11" cy="11" r="8"></circle>
+      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    </svg>
   );
 }
 
@@ -38,7 +47,7 @@ function MainHeader({ lang, search, setSearch }) {
         </Link>
 
         <div className="search-input-box">
-          <span className="search-icon-svg">🔍</span>
+          <SearchIcon />
           <input
             type="text"
             placeholder={lang === 'hi' ? 'अनुच्छेद, अधिकार या विषय खोजें...' : 'Search Articles or Rights...'}
@@ -96,29 +105,29 @@ function HomePage({ lang, search }) {
 
           <ul className="hero-bullet-list">
             <li className="hero-bullet-item">
-              📌 {lang === 'hi' ? 'मौलिक अधिकार (अनुच्छेद 12-35) की विस्तृत व्याख्या' : 'Detailed Analysis of Fundamental Rights (Articles 12-35)'}
+              • {lang === 'hi' ? 'मौलिक अधिकार (अनुच्छेद 12-35) की विस्तृत व्याख्या' : 'Detailed Analysis of Fundamental Rights (Articles 12-35)'}
             </li>
             <li className="hero-bullet-item">
-              📌 {lang === 'hi' ? 'प्रतिदिन 10 अभ्यास प्रश्नों की मॉडल सीरीज' : 'Daily Practice Quiz Series'}
+              • {lang === 'hi' ? 'प्रतिदिन 10 अभ्यास प्रश्नों की मॉडल सीरीज' : 'Daily Practice Quiz Series'}
             </li>
             <li className="hero-bullet-item">
-              📌 {lang === 'hi' ? 'सूचना का अधिकार (RTI) और नागरिक सुरक्षा कानून' : 'Right to Information (RTI) & Consumer Rights'}
+              • {lang === 'hi' ? 'सूचना का अधिकार (RTI) और नागरिक सुरक्षा कानून' : 'Right to Information (RTI) & Consumer Rights'}
             </li>
           </ul>
 
           <div>
             <Link to="/courses" className="btn-drishti-primary">
-              📚 {lang === 'hi' ? 'पाठ्यक्रम देखें' : 'View Courses'}
+              {lang === 'hi' ? 'पाठ्यक्रम देखें' : 'View Courses'}
             </Link>
             <Link to="/quiz" className="btn-drishti-secondary">
-              ✍️ {lang === 'hi' ? 'डेली क्विज़ दें' : 'Take Daily Quiz'}
+              {lang === 'hi' ? 'डेली क्विज़ दें' : 'Take Daily Quiz'}
             </Link>
           </div>
         </div>
 
         <div className="hero-side-card">
           <h3 className="side-card-title">
-            📢 {lang === 'hi' ? 'सूचना एवं अपडेट' : 'Notice & Updates'}
+            {lang === 'hi' ? 'सूचना एवं अपडेट' : 'Notice & Updates'}
           </h3>
           <p style={{ fontSize: '0.9rem', marginBottom: '0.75rem' }}>
             {lang === 'hi'
@@ -126,7 +135,7 @@ function HomePage({ lang, search }) {
               : 'All study material, articles explanation, and practice test series are 100% free for all students.'}
           </p>
           <div style={{ background: '#FFF', padding: '0.65rem', borderRadius: '4px', fontSize: '0.85rem', fontWeight: 600 }}>
-            {lang === 'hi' ? '✓ अध्ययन हेतु कोई शुल्क नहीं' : '✓ No Registration Fee Required'}
+            {lang === 'hi' ? 'अध्ययन हेतु कोई शुल्क नहीं' : 'No Registration Fee Required'}
           </div>
         </div>
       </section>
@@ -154,7 +163,7 @@ function HomePage({ lang, search }) {
       {/* ARTICLE OF THE DAY */}
       <section className="article-day-card">
         <div style={{ color: 'var(--drishti-red-dark)', fontWeight: 700, fontSize: '0.85rem', textTransform: 'uppercase', marginBottom: '0.4rem' }}>
-          💡 {lang === 'hi' ? 'आज का अनुच्छेद' : 'ARTICLE OF THE DAY'}
+          {lang === 'hi' ? 'आज का अनुच्छेद' : 'ARTICLE OF THE DAY'}
         </div>
         <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--drishti-navy-dark)', marginBottom: '0.5rem' }}>
           {lang === 'hi' ? DAILY_ARTICLE_DRISHTI.articleNo : 'Article 21 (Protection of Life & Personal Liberty)'}
@@ -172,7 +181,7 @@ function HomePage({ lang, search }) {
       <section>
         <div className="drishti-section-header">
           <h2 className="drishti-section-title">
-            📖 {lang === 'hi' ? 'उपलब्ध अध्ययन पाठ्यक्रम' : 'Available Study Modules'}
+            {lang === 'hi' ? 'उपलब्ध अध्ययन पाठ्यक्रम' : 'Available Study Modules'}
           </h2>
         </div>
 
@@ -187,7 +196,7 @@ function HomePage({ lang, search }) {
                 {lang === 'hi' ? c.description : c.descriptionEng}
               </p>
               <div className="course-item-footer">
-                <span>⏱️ {c.duration} | 📖 {c.lessons}</span>
+                <span>अवधि: {c.duration} | पाठ: {c.lessons}</span>
                 <button onClick={() => setSelectedCourse(c)} className="btn-drishti-primary" style={{ padding: '0.4rem 0.85rem', fontSize: '0.82rem' }}>
                   {lang === 'hi' ? 'विवरण देखें' : 'View Details'}
                 </button>
@@ -233,7 +242,7 @@ function CoursesPage({ lang, search }) {
   return (
     <div>
       <div className="drishti-section-header">
-        <h1 className="drishti-section-title">📖 {lang === 'hi' ? 'सभी पाठ्यक्रम' : 'All Courses'}</h1>
+        <h1 className="drishti-section-title">{lang === 'hi' ? 'सभी पाठ्यक्रम' : 'All Courses'}</h1>
       </div>
       <HomePage lang={lang} search={search} />
     </div>
@@ -290,7 +299,7 @@ function QuizPage({ lang }) {
           {lang === 'hi' ? `आपका स्कोर: ${score} / ${QUIZ_DRISHTI.length}` : `Score: ${score} / ${QUIZ_DRISHTI.length}`}
         </p>
         <button onClick={handleRestart} className="btn-drishti-primary">
-          🔄 {lang === 'hi' ? 'पुनः प्रयास करें' : 'Try Again'}
+          {lang === 'hi' ? 'पुनः प्रयास करें' : 'Try Again'}
         </button>
       </div>
     );
@@ -299,7 +308,7 @@ function QuizPage({ lang }) {
   return (
     <div className="quiz-box-container">
       <div className="quiz-header-bar">
-        <span>✍️ {lang === 'hi' ? 'दैनिक संविधान क्विज़' : 'Daily Polity Quiz'}</span>
+        <span>{lang === 'hi' ? 'दैनिक संविधान क्विज़' : 'Daily Polity Quiz'}</span>
         <span>{lang === 'hi' ? `प्रश्न ${currentIdx + 1} / ${QUIZ_DRISHTI.length}` : `Question ${currentIdx + 1} of ${QUIZ_DRISHTI.length}`}</span>
       </div>
 
@@ -325,7 +334,7 @@ function QuizPage({ lang }) {
 
       {showAnswer && (
         <div className="explanation-info-box">
-          <strong>💡 व्याख्या: </strong>
+          <strong>व्याख्या: </strong>
           <span>{q.explanation}</span>
         </div>
       )}
@@ -337,7 +346,7 @@ function QuizPage({ lang }) {
           </button>
         ) : (
           <button onClick={handleNext} className="btn-drishti-primary">
-            {currentIdx + 1 < QUIZ_DRISHTI.length ? (lang === 'hi' ? 'अगला प्रश्न ➡️' : 'Next ➡️') : (lang === 'hi' ? 'परिणाम देखें' : 'View Result')}
+            {currentIdx + 1 < QUIZ_DRISHTI.length ? (lang === 'hi' ? 'अगला प्रश्न' : 'Next') : (lang === 'hi' ? 'परिणाम देखें' : 'View Result')}
           </button>
         )}
       </div>
@@ -368,9 +377,9 @@ function DoubtSolverPage({ lang }) {
   return (
     <div className="doubt-box-container">
       <div className="doubt-header">
-        <span>💬 {lang === 'hi' ? 'प्रश्न समाधान एवं संशय निवारण' : 'Constitution Doubt Solver'}</span>
+        <span>{lang === 'hi' ? 'प्रश्न समाधान एवं संशय निवारण' : 'Constitution Doubt Solver'}</span>
         <button onClick={() => setMessages([])} style={{ background: 'none', border: 'none', color: '#FFF', cursor: 'pointer', fontSize: '0.85rem' }}>
-          🗑️ {lang === 'hi' ? 'साफ़ करें' : 'Clear'}
+          {lang === 'hi' ? 'साफ़ करें' : 'Clear'}
         </button>
       </div>
 
@@ -440,7 +449,7 @@ function App() {
       <footer className="drishti-footer">
         <div className="footer-container">
           <div>
-            <h3 style={{ color: '#FFF', fontSize: '1.2rem', marginBottom: '0.5rem' }}>संविधान मित्र 📜</h3>
+            <h3 style={{ color: '#FFF', fontSize: '1.2rem', marginBottom: '0.5rem' }}>संविधान मित्र</h3>
             <p style={{ fontSize: '0.85rem', lineHeight: '1.6' }}>
               भारतीय संविधान और नागरिक अधिकारों के अध्ययन हेतु समर्पित मंच।
             </p>
@@ -462,12 +471,12 @@ function App() {
           </div>
           <div>
             <h4 className="footer-col-title">संपर्क</h4>
-            <p>📞 हेल्पलाइन: 1800-200-1010</p>
-            <p>✉️ ईमेल: support@sanvidhanmitra.in</p>
+            <p>हेल्पलाइन: 1800-200-1010</p>
+            <p>ईमेल: support@sanvidhanmitra.in</p>
           </div>
         </div>
         <div style={{ textAlign: 'center', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '1rem' }}>
-          <p>© 2026 संविधान मित्र | सर्वाधिकार सुरक्षित। 🇮🇳</p>
+          <p>© 2026 संविधान मित्र | सर्वाधिकार सुरक्षित।</p>
         </div>
       </footer>
     </Router>
