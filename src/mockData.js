@@ -1,297 +1,167 @@
-export const EDTECH_BATCHES = [
+export const COURSES_DATA = [
   {
-    _id: '1',
-    title: 'UPSC CSE & State PCS Polity Foundation 2026',
-    titleHindi: 'यूपीएससी एवं स्टेट पीसीएस राजव्यवस्था फाउंडेशन बैच 2026',
-    category: 'upsc-polity',
-    tag: 'MOST POPULAR',
-    tagColor: '#EF4444',
-    rating: 4.9,
-    reviewsCount: 3420,
-    instructor: 'Dr. A.K. Sharma & Legal Expert Panel',
-    instructorTitle: 'Ex-IAS Advisor & Supreme Court Advocate',
-    lessons: 48,
-    tests: 15,
-    duration: '60 Hours',
-    enrolled: '54,200+ Students',
-    price: 'FREE',
-    originalPrice: '₹4,999',
-    discount: '100% OFF',
-    image: 'https://images.unsplash.com/photo-1589391886645-d51941baf7fb?w=600&q=80',
-    description: 'Complete coverage of Indian Constitution & Polity from Articles 1 to 395 for UPSC CSE, State PCS, and Legal competitive exams.',
-    descriptionHindi: 'यूपीएससी और राज्य लोक सेवा आयोग के लिए अनुच्छेद 1 से 395 तक संपूर्ण भारतीय संविधान एवं राजव्यवस्था का गहन अध्ययन।',
-    features: [
-      'Daily Live Interactive Classes & Doubt Sessions',
-      'Class Notes & Mind Maps in English & Hindi',
-      'Article 12-35 Fundamental Rights Deep Dive',
-      '10 Full-Length Mock Tests with Rank Analysis'
-    ]
-  },
-  {
-    _id: '2',
-    title: 'Fundamental Rights & Citizen Legal Rights Masterclass',
-    titleHindi: 'मौलिक अधिकार एवं नागरिक विधिक अधिकार मास्टरक्लास',
+    id: '1',
+    title: 'भारतीय संविधान - मौलिक अधिकार (Articles 12-35)',
+    titleEng: 'Indian Constitution - Fundamental Rights (Articles 12-35)',
     category: 'fundamental-rights',
-    tag: 'MUST LEARN',
-    tagColor: '#3B82F6',
-    rating: 4.95,
-    reviewsCount: 5120,
-    instructor: 'Adv. Meera Sen & Sanvidhan Mitra Faculty',
-    instructorTitle: 'Constitutional Law Rights Researcher',
-    lessons: 24,
-    tests: 8,
-    duration: '25 Hours',
-    enrolled: '82,100+ Citizens',
-    price: 'FREE',
-    originalPrice: '₹2,499',
-    discount: '100% OFF',
-    image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=80',
-    description: 'Understand your 6 Fundamental Rights, Writs under Article 32, Right to Privacy, and protection against unlawful arrest.',
-    descriptionHindi: 'अपने 6 मौलिक अधिकारों, अनुच्छेद 32 के तहत रिट याचिकाओं और अवैध गिरफ्तारी से सुरक्षा के नियम जानें।',
-    features: [
-      'Article 14-32 Clause by Clause Analysis',
-      'Landmark Supreme Court Judgments (Puttaswamy, Kesavananda)',
-      'Practical Legal Aid Guidance for Citizens',
-      'Bilingual PDF Handouts'
+    lessons: '12 पाठ',
+    duration: '4 घंटे',
+    level: 'प्रारंभिक (Beginner)',
+    tag: 'लोकप्रिय',
+    description: 'अनुच्छेद 12 से 35 तक समानता का अधिकार, स्वतंत्रता का अधिकार, शोषण के विरुद्ध अधिकार और संवैधानिक उपचारों का विस्तृत अध्ययन।',
+    descriptionEng: 'Detailed study of Articles 12 to 35 covering Right to Equality, Freedom, Protection against Exploitation, and Constitutional Remedies.',
+    topics: [
+      'अनुच्छेद 14-18: समता का अधिकार',
+      'अनुच्छेद 19-22: स्वतंत्रता का अधिकार',
+      'अनुच्छेद 23-24: शोषण के विरुद्ध अधिकार',
+      'अनुच्छेद 25-28: धर्म की स्वतंत्रता का अधिकार',
+      'अनुच्छेद 32: संवैधानिक उपचारों का अधिकार (रिट याचिकायें)'
     ]
   },
   {
-    _id: '3',
-    title: 'RTI Act 2005 & Anti-Corruption Laws Special Batch',
-    titleHindi: 'सूचना का अधिकार (RTI) एवं भ्रष्टाचार निवारण विशेष बैच',
-    category: 'rti-law',
-    tag: 'NEW BATCH',
-    tagColor: '#10B981',
-    rating: 4.88,
-    reviewsCount: 2190,
-    instructor: 'RTI Activist Rajesh Verma',
-    instructorTitle: 'Former Chief Information Commission Consultant',
-    lessons: 16,
-    tests: 5,
-    duration: '18 Hours',
-    enrolled: '31,500+ Citizens',
-    price: 'FREE',
-    originalPrice: '₹1,999',
-    discount: '100% OFF',
-    image: 'https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=600&q=80',
-    description: 'Step-by-step practical training on how to draft and file RTI applications, first appeal, second appeal, and Lokpal complaints.',
-    descriptionHindi: 'RTI आवेदन ड्राफ्ट करने, प्रथम व द्वितीय अपील दायर करने तथा लोकपाल शिकायतों की प्रैक्टिकल ट्रेनिंग।',
-    features: [
-      'RTI Online Portal Step-by-Step Filing',
-      'Drafting Formats for Gram Panchayat & PWD Inquiries',
-      'Prevention of Corruption Act Overview',
-      'Whistleblower Protection Guidelines'
+    id: '2',
+    title: 'RTI अधिनियम 2005 और भ्रष्टाचार विरोधी कानून',
+    titleEng: 'Right to Information Act 2005 & Anti-Corruption Laws',
+    category: 'rti-laws',
+    lessons: '8 पाठ',
+    duration: '3 घंटे',
+    level: 'मध्यम (Intermediate)',
+    tag: 'महत्वपूर्ण',
+    description: 'सूचना का अधिकार (RTI) कैसे लगाएं, प्रथम एवं द्वितीय अपील की प्रक्रिया और लोकपाल कानून की पूरी जानकारी।',
+    descriptionEng: 'How to file an RTI application, first and second appeal process, and overview of Lokpal and anti-corruption provisions.',
+    topics: [
+      'RTI आवेदन लिखने का सही प्रारूप',
+      'प्रथम अपील और द्वितीय अपील अधिकारी',
+      'लोकपाल और लोकायुक्त अधिनियम',
+      'भ्रष्टाचार निवारण अधिनियम'
     ]
   },
   {
-    _id: '4',
-    title: 'Women Safety Laws & POSH Act 2013 Certificate Course',
-    titleHindi: 'महिला सुरक्षा कानून एवं POSH एक्ट 2013 सर्टिफिकेट कोर्स',
+    title: 'महिला सुरक्षा और कानूनी अधिकार',
+    titleEng: 'Women Protection Laws and Rights in India',
     category: 'women-rights',
-    tag: 'CERTIFICATE',
-    tagColor: '#8B5CF6',
-    rating: 4.96,
-    reviewsCount: 4100,
-    instructor: 'Adv. Shalini Rastogi',
-    instructorTitle: 'POSH Committee Chairperson & High Court Advocate',
-    lessons: 20,
-    tests: 6,
-    duration: '22 Hours',
-    enrolled: '46,800+ Learners',
-    price: 'FREE',
-    originalPrice: '₹2,999',
-    discount: '100% OFF',
-    image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&q=80',
-    description: 'Comprehensive guide to Women Rights in India: POSH Act at workplace, Domestic Violence Act 2005, and Property Rights.',
-    descriptionHindi: 'कार्यस्थल पर POSH अधिनियम, घरेलू हिंसा अधिनियम 2005 और संपत्ति अधिकारों की संपूर्ण जानकारी।',
-    features: [
-      'POSH Internal Complaints Committee (ICC) Procedures',
-      'Domestic Violence Legal Remedies & Helpline Numbers',
-      'Equal Remuneration & Maternity Benefit Rights',
-      'Verified E-Certificate on Completion'
+    lessons: '10 पाठ',
+    duration: '3.5 घंटे',
+    level: 'प्रारंभिक (Beginner)',
+    tag: 'उपयोगी',
+    description: 'घरेलू हिंसा से महिला संरक्षण अधिनियम 2005, POSH कानून (कार्यस्थल पर सुरक्षा) और संपत्ति अधिकारों का विवरण।',
+    descriptionEng: 'Protection of Women from Domestic Violence Act 2005, POSH Act at workplace, and equal legal rights for women.',
+    topics: [
+      'घरेलू हिंसा अधिनियम 2005 के प्रावधान',
+      'कार्यस्थल पर महिलाओं का लैंगिक उत्पीड़न (POSH) कानून',
+      'समान पारिश्रमिक एवं मातृत्व लाभ अधिनियम',
+      'कानूनी सहायता (Legal Aid) की प्रक्रिया'
     ]
   },
   {
-    _id: '5',
-    title: 'Directive Principles (DPSP) & Fundamental Duties (Art 51A)',
-    titleHindi: 'राज्य के नीति निर्देशक तत्व एवं मौलिक कर्तव्य (अनुच्छेद 51A)',
-    category: 'upsc-polity',
-    tag: 'EXAM SPECIAL',
-    tagColor: '#F59E0B',
-    rating: 4.85,
-    reviewsCount: 1890,
-    instructor: 'Prof. S.K. Nanda',
-    instructorTitle: 'Senior Polity Scholar & Author',
-    lessons: 18,
-    tests: 6,
-    duration: '16 Hours',
-    enrolled: '29,400+ Students',
-    price: 'FREE',
-    originalPrice: '₹1,499',
-    discount: '100% OFF',
-    image: 'https://images.unsplash.com/photo-1436450412740-6b988f486c6b?w=600&q=80',
-    description: 'Articles 36 to 51 (Welfare State guidelines) and Article 51A (11 Fundamental Duties of every citizen).',
-    descriptionHindi: 'अनुच्छेद 36 से 51 (कल्याणकारी राज्य के सिद्धांत) तथा अनुच्छेद 51A (नागरिकों के 11 मौलिक कर्तव्य)।',
-    features: [
-      'Socialist, Gandhian & Liberal Principles Breakdown',
-      'Uniform Civil Code (Article 44) Analysis',
-      '86th Amendment & Right to Education Duty',
-      'UPSC Mains Answer Writing Practice'
+    id: '4',
+    title: 'राज्य के नीति निर्देशक तत्व (Articles 36-51)',
+    titleEng: 'Directive Principles of State Policy (Articles 36-51)',
+    category: 'dpsp',
+    lessons: '9 पाठ',
+    duration: '3 घंटे',
+    level: 'मध्यम (Intermediate)',
+    tag: 'यूपीएससी',
+    description: 'अनुच्छेद 36 से 51 तक कल्याणकारी राज्य के निर्माण के लिए सरकारों को दिए गए निर्देशों का अध्ययन।',
+    descriptionEng: 'Articles 36 to 51 providing guidance for federal and state governments to establish a welfare state.',
+    topics: [
+      'समाजवादी और गांधीवादी सिद्धांत',
+      'समान नागरिक संहिता (अनुच्छेद 44)',
+      'पर्यावरण और वन्यजीव संरक्षण (अनुच्छेद 48A)',
+      'अंतरराष्ट्रीय शांति और सुरक्षा (अनुच्छेद 51)'
     ]
   },
   {
-    _id: '6',
-    title: 'Landmark Constitutional Amendments & Supreme Court Judgments',
-    titleHindi: 'प्रमुख संवैधानिक संशोधन एवं उच्चतम न्यायालय के लैंडमार्क निर्णय',
-    category: 'upsc-polity',
-    tag: 'ADVANCED',
-    tagColor: '#EC4899',
-    rating: 4.92,
-    reviewsCount: 3780,
-    instructor: 'Dr. A.K. Sharma',
-    instructorTitle: 'Constitutional Bench Historian',
-    lessons: 30,
-    tests: 10,
-    duration: '35 Hours',
-    enrolled: '38,900+ Aspirants',
-    price: 'FREE',
-    originalPrice: '₹3,999',
-    discount: '100% OFF',
-    image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=600&q=80',
-    description: 'Detailed study of 42nd Mini-Constitution Amendment, 44th, 73rd/74th Panchayati Raj, 101st GST, 106th Nari Shakti Vandan, and Basic Structure Doctrine.',
-    descriptionHindi: '42वें मिनी-संविधान संशोधन, 44वें, 73वें/74वें पंचायती राज, 101वें जीएसटी, 106वें नारी शक्ति वंदन तथा मूल संरचना सिद्धांत का गहन अध्ययन।',
-    features: [
-      'Kesavananda Bharati Case (1973) Complete Timeline',
-      'Article 368 Amendment Procedure Simplified',
-      'Latest 106th Constitutional Amendment 2023 Details',
-      'Comparative Polity Notes'
+    id: '5',
+    title: 'प्रमुख संविधान संशोधन एवं ऐतिहासिक निर्णय',
+    titleEng: 'Major Constitutional Amendments & Landmark Judgments',
+    category: 'amendments',
+    lessons: '15 पाठ',
+    duration: '5 घंटे',
+    level: 'उच्च (Advanced)',
+    tag: 'विशेष',
+    description: '42वां मिनी-संविधान संशोधन, 44वां संशोधन, 73वां/74वां पंचायती राज, 101वां GST और केशवानंद भारती मामला।',
+    descriptionEng: 'Detailed study of 42nd, 44th, 73rd/74th amendments, GST amendment, and the Basic Structure Doctrine.',
+    topics: [
+      'अनुच्छेद 368: संविधान संशोधन की प्रक्रिया',
+      '42वां एवं 44वां संविधान संशोधन',
+      '73वां और 74वां संशोधन (पंचायती राज)',
+      'केशवानंद भारती मामला (1973) - मूल संरचना सिद्धांत'
     ]
   }
 ];
 
-export const DAILY_ARTICLE = {
-  articleNo: "Article 21 (अनुच्छेद 21)",
-  title: "Protection of Life and Personal Liberty",
-  titleHindi: "प्राण और दैहिक स्वतंत्रता का संरक्षण",
-  text: "No person shall be deprived of his life or personal liberty except according to procedure established by law.",
-  textHindi: "किसी व्यक्ति को उसके प्राण या दैहिक स्वतंत्रता से विधि द्वारा स्थापित प्रक्रिया के अनुसार ही वंचित किया जाएगा, अन्यथा नहीं।",
-  upscFact: "Extended by the Supreme Court to include Right to Privacy (Puttaswamy 2017), Right to Clean Environment (MC Mehta), Right to Education (Art 21A), and Right to Free Legal Aid.",
-  articlesCategory: "Fundamental Rights (Part III)"
+export const DAILY_ARTICLE_DRISHTI = {
+  articleNo: "अनुच्छेद 21 (Article 21)",
+  title: "प्राण और दैहिक स्वतंत्रता का संरक्षण",
+  titleEng: "Protection of Life and Personal Liberty",
+  text: "किसी व्यक्ति को उसके प्राण या दैहिक स्वतंत्रता से विधि द्वारा स्थापित प्रक्रिया के अनुसार ही वंचित किया जाएगा, अन्यथा नहीं।",
+  textEng: "No person shall be deprived of his life or personal liberty except according to procedure established by law.",
+  explanation: "यह अधिकार नागरिकों और गैर-नागरिकों दोनों को प्राप्त है। उच्चतम न्यायालय ने अपने विभिन्न निर्णयों में निजता का अधिकार (पुट्टास्वामी मामला), स्वच्छ पर्यावरण का अधिकार और मुफ्त कानूनी सहायता को भी इसके अंतर्गत माना है।"
 };
 
-export const QUIZ_QUESTIONS_PW = [
+export const QUIZ_DRISHTI = [
   {
     id: 1,
-    question: "Which of the following Articles of the Indian Constitution guarantees 'Equality Before Law' and 'Equal Protection of Laws'?",
-    questionHindi: "भारतीय संविधान का कौन सा अनुच्छेद 'विधि के समक्ष समता' और 'विधि के समान संरक्षण' की गारंटी देता है?",
-    options: ["Article 14", "Article 19", "Article 21", "Article 32"],
+    question: "भारतीय संविधान का कौन सा अनुच्छेद 'विधि के समक्ष समता' की गारंटी देता है?",
+    questionEng: "Which Article of the Indian Constitution guarantees 'Equality Before Law'?",
+    options: ["अनुच्छेद 14", "अनुच्छेद 19", "अनुच्छेद 21", "अनुच्छेद 32"],
+    optionsEng: ["Article 14", "Article 19", "Article 21", "Article 32"],
     correct: 0,
-    explanation: "Article 14 states that the State shall not deny to any person equality before the law or the equal protection of the laws within the territory of India. 'Equality before law' is borrowed from British law, while 'Equal protection of laws' is inspired by the US Constitution.",
-    explanationHindi: "अनुच्छेद 14 कहता है कि राज्य भारत के राज्यक्षेत्र में किसी व्यक्ति को विधि के समक्ष समता से या विधियों के समान संरक्षण से वंचित नहीं करेगा।",
-    examTag: "UPSC CSE 2022 Prelims"
+    explanation: "अनुच्छेद 14 के अनुसार, राज्य भारत के राज्यक्षेत्र में किसी व्यक्ति को विधि के समक्ष समता से या विधियों के समान संरक्षण से वंचित नहीं करेगा।"
   },
   {
     id: 2,
-    question: "Under Article 32, which Writ is issued by the Supreme Court to free a person from illegal detention?",
-    questionHindi: "अनुच्छेद 32 के तहत गैर-कानूनी हिरासत से किसी व्यक्ति को मुक्त कराने के लिए सुप्रीम कोर्ट कौन सी रिट जारी करता है?",
-    options: ["Mandamus (परमादेश)", "Habeas Corpus (बंदी प्रत्यक्षीकरण)", "Certiorari (उत्प्रेषण)", "Quo-Warranto (अधिकार पृच्छा)"],
+    question: "गैर-कानूनी हिरासत से किसी व्यक्ति को मुक्त कराने के लिए कौन सी रिट जारी की जाती है?",
+    questionEng: "Which writ is issued to release a person from illegal detention?",
+    options: ["परमादेश (Mandamus)", "बंदी प्रत्यक्षीकरण (Habeas Corpus)", "उत्प्रेषण (Certiorari)", "अधिकार पृच्छा (Quo-Warranto)"],
+    optionsEng: ["Mandamus", "Habeas Corpus", "Certiorari", "Quo-Warranto"],
     correct: 1,
-    explanation: "Habeas Corpus literally means 'to have the body of'. It is an order issued by the court to a person or authority who has detained another person, to produce the detainee before the court.",
-    explanationHindi: "बंदी प्रत्यक्षीकरण (Habeas Corpus) का अर्थ है 'शरीर को प्रस्तुत किया जाए'। यह अवैध रूप से हिरासत में लिए गए व्यक्ति की रिहाई के लिए जारी की जाती है।",
-    examTag: "UPSC CSE 2020 Prelims"
+    explanation: "बंदी प्रत्यक्षीकरण (Habeas Corpus) का शाब्दिक अर्थ है 'शरीर को प्रस्तुत किया जाए'। यह अवैध रूप से निरुद्ध व्यक्ति को न्यायालय के समक्ष प्रस्तुत करने हेतु जारी की जाती है।"
   },
   {
     id: 3,
-    question: "The 86th Constitutional Amendment Act, 2002 inserted which Fundamental Right into the Indian Constitution?",
-    questionHindi: "86वें संविधान संशोधन अधिनियम, 2002 द्वारा भारतीय संविधान में कौन सा मौलिक अधिकार जोड़ा गया था?",
-    options: ["Right to Information (RTI)", "Right to Education (Article 21A)", "Right to Property", "Right to Work"],
-    correct: 1,
-    explanation: "The 86th Amendment inserted Article 21A, making free and compulsory education a Fundamental Right for children aged 6 to 14 years. It also added the 11th Fundamental Duty under Article 51A(k).",
-    explanationHindi: "86वें संशोधन ने अनुच्छेद 21A जोड़ा, जिसके तहत 6 से 14 वर्ष के बच्चों के लिए मुफ्त और अनिवार्य शिक्षा को मौलिक अधिकार बनाया गया।",
-    examTag: "State PCS & SSC CGL"
+    question: "सूचना का अधिकार (RTI) अधिनियम किस वर्ष लागू हुआ था?",
+    questionEng: "In which year was the Right to Information (RTI) Act enacted?",
+    options: ["वर्ष 2000", "वर्ष 2003", "वर्ष 2005", "वर्ष 2008"],
+    optionsEng: ["Year 2000", "Year 2003", "Year 2005", "Year 2008"],
+    correct: 2,
+    explanation: "RTI अधिनियम 12 अक्टूबर 2005 को पूर्ण रूप से लागू हुआ। इसके तहत नागरिक सरकारी विभागों से सूचना मांग सकते हैं।"
   },
   {
     id: 4,
-    question: "The 'Basic Structure Doctrine' of the Indian Constitution was propounded by the Supreme Court in which landmark case?",
-    questionHindi: "भारतीय संविधान का 'मूल संरचना सिद्धांत' (Basic Structure Doctrine) किस ऐतिहासिक मामले में सुप्रीम कोर्ट द्वारा प्रतिपादित किया गया था?",
-    options: ["Golaknath Case (1967)", "Kesavananda Bharati Case (1973)", "Minerva Mills Case (1980)", "Maneka Gandhi Case (1978)"],
+    question: "मूल संरचना सिद्धांत (Basic Structure Doctrine) का प्रतिपादन किस मामले में हुआ था?",
+    questionEng: "In which case was the 'Basic Structure Doctrine' formulated?",
+    options: ["गोलकनाथ मामला (1967)", "केशवानंद भारती मामला (1973)", "मिनर्वा मिल्स मामला (1980)", "मेनका गांधी मामला (1978)"],
+    optionsEng: ["Golaknath Case (1967)", "Kesavananda Bharati Case (1973)", "Minerva Mills Case (1980)", "Maneka Gandhi Case (1978)"],
     correct: 1,
-    explanation: "In Kesavananda Bharati v. State of Kerala (1973), a 13-judge Bench held that Parliament has wide powers to amend the Constitution under Article 368, but cannot alter or destroy its 'Basic Structure'.",
-    explanationHindi: "केशवानंद भारती बनाम केरल राज्य (1973) मामले में 13 जजों की पीठ ने निर्णय दिया कि संसद अनुच्छेद 368 के तहत संविधान का संशोधन कर सकती है, लेकिन इसके मूल ढांचे को नहीं बदल सकती।",
-    examTag: "UPSC Mains & Law Legal Prelims"
-  },
-  {
-    id: 5,
-    question: "Which Schedule of the Indian Constitution contains provisions regarding the Anti-Defection Law?",
-    questionHindi: "भारतीय संविधान की कौन सी अनुसूची दल-बदल विरोधी कानून (Anti-Defection Law) से संबंधित प्रावधान प्रदान करती है?",
-    options: ["8th Schedule", "9th Schedule", "10th Schedule", "11th Schedule"],
-    correct: 2,
-    explanation: "The 10th Schedule was added by the 52nd Constitutional Amendment Act, 1985. It sets out the grounds for disqualification of elected members on grounds of defection.",
-    explanationHindi: "10वीं अनुसूची को 52वें संविधान संशोधन 1985 द्वारा जोड़ा गया था। यह दल-बदल के आधार पर सांसदों और विधायकों की अयोग्यता से संबंधित है।",
-    examTag: "UPSC CSE Prelims"
+    explanation: "केशवानंद भारती मामला (1973) में उच्चतम न्यायालय ने निर्णय दिया कि संसद संविधान के मूल ढांचे में परिवर्तन नहीं कर सकती।"
   }
 ];
 
-export const TESTIMONIALS = [
-  {
-    name: "Vikramaditya Singh",
-    role: "UPSC CSE Rank 42 Aspirant (Delhi)",
-    text: "Sanvidhan Mitra's Article breakdown and AI Saarthi doubt solver made Indian Polity crystal clear! The bilingual notes and quiz explanations are on par with top UPSC coaching institutes.",
-    rating: 5,
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&q=80"
-  },
-  {
-    name: "Pooja Deshmukh",
-    role: "Law Student & Women Rights Advocate (Pune)",
-    text: "The POSH Act and Women Protections courses are explained with genuine clarity. It empowers everyday citizens as well as legal professionals.",
-    rating: 5,
-    avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&q=80"
-  },
-  {
-    name: "Rohan Sharma",
-    role: "RTI Applicant & Social Worker (Jaipur)",
-    text: "I drafted my first successful RTI application using Sanvidhan Mitra's guidance module. Truly revolutionary platform for democratic awareness in India!",
-    rating: 5,
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&q=80"
-  }
-];
-
-export const PREAMBLE_TEXTS = {
-  en: {
-    heading: "THE CONSTITUTION OF INDIA",
-    subheading: "PREAMBLE",
-    text: "WE, THE PEOPLE OF INDIA, having solemnly resolved to constitute India into a SOVEREIGN SOCIALIST SECULAR DEMOCRATIC REPUBLIC and to secure to all its citizens:",
-    justice: "JUSTICE, social, economic and political;",
-    liberty: "LIBERTY of thought, expression, belief, faith and worship;",
-    equality: "EQUALITY of status and of opportunity; and to promote among them all",
-    fraternity: "FRATERNITY assuring the dignity of the individual and the unity and integrity of the Nation;",
-    date: "IN OUR CONSTITUENT ASSEMBLY this twenty-sixth day of November, 1949, do HEREBY ADOPT, ENACT AND GIVE TO OURSELVES THIS CONSTITUTION."
-  },
+export const PREAMBLE_SIMPLE = {
   hi: {
     heading: "भारत का संविधान",
     subheading: "उद्देशिका (प्रस्तावना)",
-    text: "हम, भारत के लोग, भारत को एक संपूर्ण प्रभुत्व-संपन्न समाजवादी पंथनिरपेक्ष लोकतंत्रात्मक गणराज्य बनाने के लिए, तथा उसके समस्त नागरिकों को:",
-    justice: "सामाजिक, आर्थिक और राजनीतिक न्याय;",
-    liberty: "विचार, अभिव्यक्ति, विश्वास, धर्म और उपासना की स्वतंत्रता;",
-    equality: "प्रतिष्ठा और अवसर की समता प्राप्त कराने के लिए, तथा उन सब में",
-    fraternity: "व्यक्ति की गरिमा और राष्ट्र की एकता और अखंडता सुनिश्चित करने वाली बंधुता बढ़ाने के लिए",
-    date: "दृढ़संकल्प होकर अपनी इस संविधान सभा में आज तारीख 26 नवम्बर, 1949 ई० को एतद्द्वारा इस संविधान को अंगीकृत, अधिनियमित और आत्मार्पित करते हैं।"
+    body: "हम, भारत के लोग, भारत को एक संपूर्ण प्रभुत्व-संपन्न समाजवादी पंथनिरपेक्ष लोकतंत्रात्मक गणराज्य बनाने के लिए, तथा उसके समस्त नागरिकों को:\n\n• सामाजिक, आर्थिक और राजनीतिक न्याय;\n• विचार, अभिव्यक्ति, विश्वास, धर्म और उपासना की स्वतंत्रता;\n• प्रतिष्ठा और अवसर की समता;\n\nप्राप्त कराने के लिए, तथा उन सब में व्यक्ति की गरिमा और राष्ट्र की एकता और अखंडता सुनिश्चित करने वाली बंधुता बढ़ाने के लिए दृढ़संकल्प होकर अपनी इस संविधान सभा में आज तारीख 26 नवम्बर, 1949 ई० को एतद्द्वारा इस संविधान को अंगीकृत, अधिनियमित और आत्मार्पित करते हैं।"
+  },
+  en: {
+    heading: "THE CONSTITUTION OF INDIA",
+    subheading: "PREAMBLE",
+    body: "WE, THE PEOPLE OF INDIA, having solemnly resolved to constitute India into a SOVEREIGN SOCIALIST SECULAR DEMOCRATIC REPUBLIC and to secure to all its citizens:\n\n• JUSTICE, social, economic and political;\n• LIBERTY of thought, expression, belief, faith and worship;\n• EQUALITY of status and of opportunity; and to promote among them all\n• FRATERNITY assuring the dignity of the individual and the unity and integrity of the Nation;\n\nIN OUR CONSTITUENT ASSEMBLY this twenty-sixth day of November, 1949, do HEREBY ADOPT, ENACT AND GIVE TO OURSELVES THIS CONSTITUTION."
   }
 };
 
-export function getAiDoubtAnswer(prompt) {
-  const q = prompt.toLowerCase();
-  if (q.includes('21') || q.includes('life') || q.includes('privacy') || q.includes('jeevan')) {
-    return `📜 **Article 21 - Protection of Life & Personal Liberty**\n\n"No person shall be deprived of his life or personal liberty except according to procedure established by law."\n\n📌 **Key Rights Included under Art. 21:**\n1. Right to Privacy (Puttaswamy Judgment 2017)\n2. Right to Clean Environment (MC Mehta case)\n3. Right to Education (Art 21A)\n4. Right to Speedy Trial & Free Legal Aid (Art 39A)\n5. Right to Livelihood & Dignity (Olga Tellis case)`;
+export function getSimpleAnswer(query) {
+  const text = query.toLowerCase();
+  if (text.includes('21') || text.includes('प्राण') || text.includes('life')) {
+    return `📜 **अनुच्छेद 21 (Article 21) - प्राण और दैहिक स्वतंत्रता**\n\nकिसी भी व्यक्ति को उसके प्राण या दैहिक स्वतंत्रता से केवल कानून द्वारा स्थापित प्रक्रिया के अनुसार ही वंचित किया जा सकता है।\n\n• यह अधिकार नागरिकों और विदेशी नागरिकों दोनों को प्राप्त है।\n• इसके अंतर्गत निजता का अधिकार, स्वच्छ पर्यावरण का अधिकार और निःशुल्क कानूनी सहायता शामिल है।`;
   }
-  if (q.includes('rti') || q.includes('information') || q.includes('suchna')) {
-    return `ℹ️ **Right to Information (RTI Act 2005)**\n\n• **Who can file**: Any Indian Citizen.\n• **Time Limit**: 30 days for general info; 48 hours if life/liberty is concerned.\n• **Application Fee**: ₹10 (Free for BPL families).\n• **Portal**: rtionline.gov.in or written application to Public Information Officer (PIO).\n• **Appeals**: First Appeal within 30 days to FAA; Second Appeal to Central/State Information Commission.`;
+  if (text.includes('rti') || text.includes('सूचना') || text.includes('information')) {
+    return `ℹ️ **सूचना का अधिकार (RTI Act 2005)**\n\n• **आवेदन कैसे करें**: आरटीआई पोर्टल (rtionline.gov.in) पर या जन सूचना अधिकारी (PIO) को लिखित आवेदन दें।\n• **शुल्क**: ₹10 (बीपीएल परिवारों के लिए निशुल्क)।\n• **समय सीमा**: सामान्य स्थिति में 30 दिन, जीवन या स्वतंत्रता से जुड़े मामले में 48 घंटे।`;
   }
-  if (q.includes('right') || q.includes('fundamental') || q.includes('adhikar') || q.includes('14') || q.includes('19') || q.includes('32')) {
-    return `⚖️ **6 Fundamental Rights of India (Articles 12-35):**\n\n1. **Right to Equality** (Articles 14–18)\n2. **Right to Freedom** (Articles 19–22)\n3. **Right against Exploitation** (Articles 23–24)\n4. **Right to Freedom of Religion** (Articles 25–28)\n5. **Cultural & Educational Rights** (Articles 29–30)\n6. **Right to Constitutional Remedies** (Article 32 - Heart & Soul of Constitution)`;
+  if (text.includes('अधिकार') || text.includes('fundamental') || text.includes('right') || text.includes('14')) {
+    return `⚖️ **संविधान में 6 मौलिक अधिकार (Articles 12-35):**\n\n1. समानता का अधिकार (अनुच्छेद 14-18)\n2. स्वतंत्रता का अधिकार (अनुच्छेद 19-22)\n3. शोषण के विरुद्ध अधिकार (अनुच्छेद 23-24)\n4. धार्मिक स्वतंत्रता का अधिकार (अनुच्छेद 25-28)\n5. संस्कृति और शिक्षा संबंधी अधिकार (अनुच्छेद 29-30)\n6. संवैधानिक उपचारों का अधिकार (अनुच्छेद 32)`;
   }
-  if (q.includes('posh') || q.includes('women') || q.includes('mahila') || q.includes('safety')) {
-    return `🛡️ **Women Legal Protections in India:**\n\n• **POSH Act 2013**: Prevention of Sexual Harassment at Workplace (Internal Complaints Committee mandatory in organizations with 10+ employees).\n• **Domestic Violence Act 2005**: Protection against physical, verbal, emotional, and economic abuse.\n• **Equal Remuneration Act 1976**: Equal pay for equal work.\n• **Helpline**: National Emergency Helpline 112 / Women Helpline 1091.`;
-  }
-  return `🏛️ **Sanvidhan AI Saarthi Doubt Solver:**\n\nI am your constitutional assistant! You asked: "${prompt}".\n\n**Polity Quick Reference:**\n• Total Articles: 395 (in 22 Parts)\n• Total Schedules: 12\n• Key Amendments: 42nd (1976), 44th (1978), 73rd/74th (1992), 101st (GST), 106th (Nari Shakti 2023).\n\nFeel free to ask me about specific Articles, RTI filing procedure, POSH Act, Supreme Court Writs, or UPSC Polity questions!`;
+  return `🏛️ **संविधान अध्ययन केंद्र:**\n\nआपने पूछा: "${query}"\n\nभारतीय संविधान में कुल 395 अनुच्छेद, 22 भाग और 12 अनुसूचियां हैं। आप किसी भी अनुच्छेद (जैसे अनुच्छेद 14, 19, 21, 32) या कानून (RTI, POSH) के बारे में प्रश्न पूछ सकते हैं।`;
 }

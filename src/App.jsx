@@ -1,339 +1,227 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation, Navigate } from 'react-router-dom';
-import api from './api';
-import { EDTECH_BATCHES, DAILY_ARTICLE, QUIZ_QUESTIONS_PW, TESTIMONIALS, PREAMBLE_TEXTS, getAiDoubtAnswer } from './mockData';
+import { COURSES_DATA, DAILY_ARTICLE_DRISHTI, QUIZ_DRISHTI, PREAMBLE_SIMPLE, getSimpleAnswer } from './mockData';
 import './index.css';
 
-function NoticeBar({ lang }) {
+function TopStrip({ lang, setLang }) {
   return (
-    <div className="top-notice-bar">
-      <span className="notice-badge">🔥 NEW BATCH</span>
-      <span>
-        {lang === 'hi'
-          ? 'यूपीएससी एवं संविधान कानून 2026 फाउंडेशन बैच प्रारंभ | 100% निशुल्क एक्सेस | हेल्पलाइन: 1800-SANVIDHAN'
-          : 'UPSC CSE & Constitutional Rights Foundation Batch 2026 Live Now | 100% Free Access | Helpline: 1800-SANVIDHAN'}
-      </span>
+    <div className="drishti-top-strip">
+      <div>
+        <span>📞 हेल्पलाइन: 1800-200-1010 | ✉️ ईमेल: support@sanvidhanmitra.in</span>
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+        <span>संविधान अध्ययन एवं नागरिक जागरूकता मंच</span>
+        <button className="lang-toggle-btn" onClick={() => setLang(l => (l === 'hi' ? 'en' : 'hi'))}>
+          🌐 {lang === 'hi' ? 'English' : 'हिंदी'}
+        </button>
+      </div>
     </div>
   );
 }
 
-function Header({ lang, setLang, search, setSearch, openAuthModal }) {
+function MainHeader({ lang, search, setSearch }) {
   const location = useLocation();
 
   return (
-    <header className="edtech-header">
-      <div className="header-inner">
-        <Link to="/" className="logo-group">
-          <div className="logo-icon">📜</div>
-          <div className="logo-text-box">
-            <span className="logo-title">SANVIDHAN MITRA</span>
-            <span className="logo-subtitle">
-              {lang === 'hi' ? 'भारत का #1 संविधान शिक्षण संस्थान' : 'India\'s #1 Constitutional EdTech'}
+    <header className="drishti-main-header">
+      <div className="header-container">
+        <Link to="/" className="brand-box">
+          <div className="brand-logo-emblem">सं</div>
+          <div className="brand-text">
+            <span className="brand-main-title">
+              {lang === 'hi' ? 'संविधान मित्र' : 'SANVIDHAN MITRA'}
+            </span>
+            <span className="brand-tagline">
+              {lang === 'hi' ? 'भारतीय संविधान अध्ययन केंद्र' : 'Indian Constitution Learning Center'}
             </span>
           </div>
         </Link>
 
-        <div className="header-search">
-          <span className="search-icon">🔍</span>
+        <div className="search-input-box">
+          <span className="search-icon-svg">🔍</span>
           <input
             type="text"
-            placeholder={lang === 'hi' ? 'अनुच्छेद, अधिकार, RTI या प्रश्न खोजें...' : 'Search Articles, Fundamental Rights, RTI...'}
+            placeholder={lang === 'hi' ? 'अनुच्छेद, अधिकार या विषय खोजें...' : 'Search Articles or Rights...'}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
 
-        <nav className="nav-menu">
-          <Link to="/" className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}>
-            🏠 {lang === 'hi' ? 'होम' : 'Home'}
+        <nav className="nav-links-menu">
+          <Link to="/" className={`nav-menu-item ${location.pathname === '/' ? 'active' : ''}`}>
+            {lang === 'hi' ? 'गृह' : 'Home'}
           </Link>
-          <Link to="/batches" className={`nav-link ${location.pathname === '/batches' ? 'active' : ''}`}>
-            📚 {lang === 'hi' ? 'बैच एवं कोर्सेस' : 'Batches'}
+          <Link to="/courses" className={`nav-menu-item ${location.pathname === '/courses' ? 'active' : ''}`}>
+            {lang === 'hi' ? 'पाठ्यक्रम' : 'Courses'}
           </Link>
-          <Link to="/test-series" className={`nav-link ${location.pathname === '/test-series' ? 'active' : ''}`}>
-            ✍️ {lang === 'hi' ? 'फ्री टेस्ट सीरीज़' : 'Free Tests'}
+          <Link to="/quiz" className={`nav-menu-item ${location.pathname === '/quiz' ? 'active' : ''}`}>
+            {lang === 'hi' ? 'डेली क्विज़' : 'Daily Quiz'}
           </Link>
-          <Link to="/saarthi-ai" className={`nav-link ${location.pathname === '/saarthi-ai' ? 'active' : ''}`}>
-            🤖 {lang === 'hi' ? 'AI सारथी' : 'AI Saarthi'}
+          <Link to="/doubt-solver" className={`nav-menu-item ${location.pathname === '/doubt-solver' ? 'active' : ''}`}>
+            {lang === 'hi' ? 'प्रश्न उत्तर' : 'Doubt Solver'}
           </Link>
-          <Link to="/preamble" className={`nav-link ${location.pathname === '/preamble' ? 'active' : ''}`}>
-            📜 {lang === 'hi' ? 'प्रस्तावना' : 'Preamble'}
+          <Link to="/preamble" className={`nav-menu-item ${location.pathname === '/preamble' ? 'active' : ''}`}>
+            {lang === 'hi' ? 'प्रस्तावना' : 'Preamble'}
           </Link>
-
-          <button className="lang-switch" onClick={() => setLang(l => (l === 'en' ? 'hi' : 'en'))}>
-            🌐 {lang === 'en' ? 'हिंदी' : 'English'}
-          </button>
-
-          <button className="btn-header-cta" onClick={openAuthModal}>
-            👤 {lang === 'hi' ? 'लॉगइन / रजिस्ट्रेशन' : 'Login / Register'}
-          </button>
         </nav>
       </div>
     </header>
   );
 }
 
-function Home({ lang, search, openAuthModal }) {
-  const [activeCategory, setActiveCategory] = useState('all');
-  const [selectedBatch, setSelectedBatch] = useState(null);
+function HomePage({ lang, search }) {
+  const [selectedCourse, setSelectedCourse] = useState(null);
 
-  const filteredBatches = EDTECH_BATCHES.filter(b => {
-    const matchCat = activeCategory === 'all' || b.category === activeCategory;
-    const matchQuery = b.title.toLowerCase().includes(search.toLowerCase()) ||
-                       b.description.toLowerCase().includes(search.toLowerCase());
-    return matchCat && matchQuery;
+  const filteredCourses = COURSES_DATA.filter(c => {
+    const title = lang === 'hi' ? c.title : c.titleEng;
+    const desc = lang === 'hi' ? c.description : c.descriptionEng;
+    return title.toLowerCase().includes(search.toLowerCase()) || desc.toLowerCase().includes(search.toLowerCase());
   });
 
   return (
     <div>
-      {/* HERO BANNER SECTION */}
-      <section className="hero-edtech-grid">
+      {/* HERO SECTION */}
+      <section className="drishti-hero-box">
         <div>
-          <div className="hero-tag-badge">
-            ⚡ {lang === 'hi' ? 'अब हर नागरिक बनेगा संविधान से सशक्त' : 'Empowering 140 Crore Indian Citizens'}
-          </div>
-          <h1 className="hero-main-title">
+          <h1 className="hero-heading">
             {lang === 'hi'
-              ? 'संविधान मित्र: भारत का विश्वसनीय विधिक शिक्षण मंच'
-              : 'Master Indian Constitution & Legal Rights with India\'s Leading EdTech Platform'}
+              ? 'भारतीय संविधान एवं राजव्यवस्था'
+              : 'Indian Constitution & Public Law'}
           </h1>
-          <p className="hero-sub-text">
+          <p className="hero-subheading">
             {lang === 'hi'
-              ? 'UPSC राजव्यवस्था (Polity), मौलिक अधिकार, RTI अधिनियम और नागरिक अधिकारों का संपूर्ण अध्ययन - PW और Drishti IAS पैटर्न पर आधारित।'
-              : 'Interactive live batches, AI-powered 24x7 doubt solver, and UPSC prelims test series designed by legal scholars & polity experts.'}
+              ? 'संविधान के प्रमुख अनुच्छेदों, मौलिक अधिकारों, नीति निर्देशक तत्वों और नागरिक अधिकारों का सरल एवं प्रामाणिक अध्ययन।'
+              : 'Comprehensive guide to Constitutional Articles, Fundamental Rights, RTI Act, and Citizen Protections.'}
           </p>
 
-          <div className="checklist-grid">
-            <div className="check-item">
-              <span className="check-icon">✓</span> {lang === 'hi' ? 'लाइव एवं रिकॉर्डेड क्लासेज' : 'Live & Recorded Video Lectures'}
-            </div>
-            <div className="check-item">
-              <span className="check-icon">✓</span> {lang === 'hi' ? 'AI संविधान सारथी (24x7 Doubt Solver)' : 'AI Sanvidhan Saarthi Doubt Solver'}
-            </div>
-            <div className="check-item">
-              <span className="check-icon">✓</span> {lang === 'hi' ? '1000+ टॉपिक-वाइज प्रैक्टिस प्रश्न' : '1000+ Topic-wise Practice Questions'}
-            </div>
-            <div className="check-item">
-              <span className="check-icon">✓</span> {lang === 'hi' ? 'द्विभाषी पीडीएफ नोट्स (Hindi & Eng)' : 'Bilingual Handouts & Mindmaps'}
-            </div>
-          </div>
+          <ul className="hero-bullet-list">
+            <li className="hero-bullet-item">
+              📌 {lang === 'hi' ? 'मौलिक अधिकार (अनुच्छेद 12-35) की विस्तृत व्याख्या' : 'Detailed Analysis of Fundamental Rights (Articles 12-35)'}
+            </li>
+            <li className="hero-bullet-item">
+              📌 {lang === 'hi' ? 'प्रतिदिन 10 अभ्यास प्रश्नों की मॉडल सीरीज' : 'Daily Practice Quiz Series'}
+            </li>
+            <li className="hero-bullet-item">
+              📌 {lang === 'hi' ? 'सूचना का अधिकार (RTI) और नागरिक सुरक्षा कानून' : 'Right to Information (RTI) & Consumer Rights'}
+            </li>
+          </ul>
 
-          <div className="hero-cta-group">
-            <Link to="/batches" className="btn-cta-primary">
-              🚀 {lang === 'hi' ? 'फ्री बैच में एनरोल करें' : 'Explore Free Batches'}
+          <div>
+            <Link to="/courses" className="btn-drishti-primary">
+              📚 {lang === 'hi' ? 'पाठ्यक्रम देखें' : 'View Courses'}
             </Link>
-            <Link to="/saarthi-ai" className="btn-cta-secondary">
-              🤖 {lang === 'hi' ? 'AI सारथी से डाउट पूछें' : 'Try AI Doubt Solver'}
+            <Link to="/quiz" className="btn-drishti-secondary">
+              ✍️ {lang === 'hi' ? 'डेली क्विज़ दें' : 'Take Daily Quiz'}
             </Link>
           </div>
         </div>
 
-        <div className="hero-card-widget">
-          <img src="/hero_banner.png" alt="Sanvidhan Mitra EdTech Banner" className="hero-card-img" />
-          <div className="hero-card-body">
-            <div className="live-pill">
-              <span className="pulsing-dot"></span> 🔴 LIVE BATCH 2026
-            </div>
-            <h3 style={{ fontSize: '1.2rem', fontWeight: 800, marginBottom: '0.4rem', color: '#FFF' }}>
-              UPSC & State PCS Polity Foundation Batch
-            </h3>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', marginBottom: '1rem' }}>
-              By Dr. A.K. Sharma (Ex-IAS Advisor) & Legal Scholar Panel
-            </p>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ color: 'var(--ed-emerald)', fontWeight: 800, fontSize: '1.2rem' }}>FREE ACCESS</span>
-              <button onClick={openAuthModal} className="btn-header-cta">
-                Enroll Now
-              </button>
-            </div>
+        <div className="hero-side-card">
+          <h3 className="side-card-title">
+            📢 {lang === 'hi' ? 'सूचना एवं अपडेट' : 'Notice & Updates'}
+          </h3>
+          <p style={{ fontSize: '0.9rem', marginBottom: '0.75rem' }}>
+            {lang === 'hi'
+              ? 'संविधान मित्र पर सभी अध्ययन सामग्री और अभ्यास क्विज़ 100% निःशुल्क उपलब्ध हैं।'
+              : 'All study material, articles explanation, and practice test series are 100% free for all students.'}
+          </p>
+          <div style={{ background: '#FFF', padding: '0.65rem', borderRadius: '4px', fontSize: '0.85rem', fontWeight: 600 }}>
+            {lang === 'hi' ? '✓ अध्ययन हेतु कोई शुल्क नहीं' : '✓ No Registration Fee Required'}
           </div>
         </div>
       </section>
 
-      {/* STATS STRIP */}
-      <section className="stats-strip">
-        <div className="stat-box">
-          <div className="stat-box-icon icon-blue">📖</div>
-          <div>
-            <div className="stat-val">395+</div>
-            <div className="stat-lbl">{lang === 'hi' ? 'अनुच्छेद (Articles Covered)' : 'Articles Covered'}</div>
-          </div>
+      {/* STATS ROW */}
+      <section className="drishti-stats-row">
+        <div className="stat-item-box">
+          <div className="stat-item-number">395+</div>
+          <div className="stat-item-label">{lang === 'hi' ? 'अनुच्छेद (Articles)' : 'Articles Covered'}</div>
         </div>
-        <div className="stat-box">
-          <div className="stat-box-icon icon-saffron">📜</div>
-          <div>
-            <div className="stat-val">12</div>
-            <div className="stat-lbl">{lang === 'hi' ? 'अनुसूचियां (Schedules)' : 'Schedules Explained'}</div>
-          </div>
+        <div className="stat-item-box">
+          <div className="stat-item-number">12</div>
+          <div className="stat-item-label">{lang === 'hi' ? 'अनुसूचियां (Schedules)' : 'Schedules'}</div>
         </div>
-        <div className="stat-box">
-          <div className="stat-box-icon icon-green">👥</div>
-          <div>
-            <div className="stat-val">150,000+</div>
-            <div className="stat-lbl">{lang === 'hi' ? 'सक्रिय विद्यार्थी (Learners)' : 'Enrolled Students'}</div>
-          </div>
+        <div className="stat-item-box">
+          <div className="stat-item-number">6</div>
+          <div className="stat-item-label">{lang === 'hi' ? 'मौलिक अधिकार' : 'Fundamental Rights'}</div>
         </div>
-        <div className="stat-box">
-          <div className="stat-box-icon icon-purple">⭐</div>
-          <div>
-            <div className="stat-val">4.9 / 5</div>
-            <div className="stat-lbl">{lang === 'hi' ? 'स्टूडेंट रेटिंग (Rating)' : 'Student Rating'}</div>
-          </div>
+        <div className="stat-item-box">
+          <div className="stat-item-number">100%</div>
+          <div className="stat-item-label">{lang === 'hi' ? 'निःशुल्क सामग्री' : 'Free Access'}</div>
         </div>
       </section>
 
-      {/* ARTICLE OF THE DAY SECTION */}
-      <section className="article-today-banner">
-        <div className="today-tag">
-          💡 {lang === 'hi' ? 'आज का महत्वपूर्ण अनुच्छेद' : 'ARTICLE OF THE DAY (UPSC FACT)'}
+      {/* ARTICLE OF THE DAY */}
+      <section className="article-day-card">
+        <div style={{ color: 'var(--drishti-red-dark)', fontWeight: 700, fontSize: '0.85rem', textTransform: 'uppercase', marginBottom: '0.4rem' }}>
+          💡 {lang === 'hi' ? 'आज का अनुच्छेद' : 'ARTICLE OF THE DAY'}
         </div>
-        <h2 style={{ fontSize: '1.6rem', color: '#FDE047', fontWeight: 800, marginBottom: '0.4rem' }}>
-          {lang === 'hi' ? DAILY_ARTICLE.titleHindi : DAILY_ARTICLE.title} ({DAILY_ARTICLE.articleNo})
+        <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--drishti-navy-dark)', marginBottom: '0.5rem' }}>
+          {lang === 'hi' ? DAILY_ARTICLE_DRISHTI.articleNo : 'Article 21 (Protection of Life & Personal Liberty)'}
         </h2>
-        <p style={{ fontSize: '1.05rem', fontStyle: 'italic', marginBottom: '1rem', color: '#FFF' }}>
-          "{lang === 'hi' ? DAILY_ARTICLE.textHindi : DAILY_ARTICLE.text}"
+        <p style={{ fontStyle: 'italic', fontSize: '1rem', color: 'var(--text-dark)', marginBottom: '0.75rem' }}>
+          "{lang === 'hi' ? DAILY_ARTICLE_DRISHTI.text : DAILY_ARTICLE_DRISHTI.textEng}"
         </p>
-        <div style={{ background: 'rgba(255,255,255,0.06)', padding: '1rem', borderRadius: '10px', borderLeft: '4px solid #FDE047' }}>
-          <strong style={{ color: '#FDE047' }}>📌 UPSC & Legal Exam Insight: </strong>
-          <span style={{ color: 'var(--text-secondary)', fontSize: '0.92rem' }}>{DAILY_ARTICLE.upscFact}</span>
+        <div style={{ background: '#F8FAFC', padding: '0.85rem 1rem', borderRadius: '4px', borderLeft: '3px solid var(--drishti-red)' }}>
+          <strong style={{ color: 'var(--drishti-red-dark)' }}>व्याख्या: </strong>
+          <span style={{ fontSize: '0.9rem' }}>{DAILY_ARTICLE_DRISHTI.explanation}</span>
         </div>
       </section>
 
-      {/* FEATURED BATCHES & COURSES GRID */}
+      {/* COURSES LIST */}
       <section>
-        <div className="section-title-group">
-          <h2 className="main-sec-heading">
-            🎯 {lang === 'hi' ? 'प्रमुख बैचेस एवं कोर्सेस' : 'Featured Batches & Learning Modules'}
+        <div className="drishti-section-header">
+          <h2 className="drishti-section-title">
+            📖 {lang === 'hi' ? 'उपलब्ध अध्ययन पाठ्यक्रम' : 'Available Study Modules'}
           </h2>
-          <p className="main-sec-sub">
-            {lang === 'hi'
-              ? 'अपनी परीक्षा एवं विधिक जागरूकता के अनुसार सही बैच चुनें'
-              : 'Choose the right course tailored for UPSC, Law Entrance, and Citizen Awareness.'}
-          </p>
         </div>
 
-        <div className="category-tabs">
-          {[
-            { id: 'all', label: lang === 'hi' ? 'सभी बैचेस (All Batches)' : 'All Batches' },
-            { id: 'upsc-polity', label: lang === 'hi' ? 'यूपीएससी राजव्यवस्था' : 'UPSC Polity' },
-            { id: 'fundamental-rights', label: lang === 'hi' ? 'मौलिक अधिकार' : 'Fundamental Rights' },
-            { id: 'rti-law', label: lang === 'hi' ? 'RTI एवं एंटी-करप्शन' : 'RTI & Anti-Corruption' },
-            { id: 'women-rights', label: lang === 'hi' ? 'महिला सुरक्षा अधिकार' : 'Women Rights' }
-          ].map(t => (
-            <button
-              key={t.id}
-              onClick={() => setActiveCategory(t.id)}
-              className={`tab-btn ${activeCategory === t.id ? 'active-tab' : ''}`}
-            >
-              {t.label}
-            </button>
-          ))}
-        </div>
-
-        <div className="batches-grid">
-          {filteredBatches.map(batch => (
-            <div key={batch._id} className="batch-card">
-              <span className="batch-tag-pill" style={{ background: batch.tagColor }}>
-                {batch.tag}
-              </span>
-              <img src={batch.image} alt={batch.title} className="batch-thumb" />
-              <div className="batch-content">
-                <h3 className="batch-title">
-                  {lang === 'hi' && batch.titleHindi ? batch.titleHindi : batch.title}
-                </h3>
-                <div className="instructor-info">
-                  <span>👨‍🏫 {batch.instructor}</span>
-                </div>
-                <div className="batch-meta-row">
-                  <span>🎥 {batch.lessons} Lessons</span>
-                  <span>✍️ {batch.tests} Tests</span>
-                  <span>⏱️ {batch.duration}</span>
-                </div>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', marginBottom: '1.25rem' }}>
-                  {lang === 'hi' && batch.descriptionHindi ? batch.descriptionHindi : batch.description}
-                </p>
-                <div className="batch-price-row">
-                  <div className="price-box">
-                    <span className="free-price">{batch.price}</span>
-                    <span className="orig-price">{batch.originalPrice}</span>
-                  </div>
-                  <button onClick={() => setSelectedBatch(batch)} className="btn-header-cta">
-                    {lang === 'hi' ? 'बैच विवरण देखें' : 'Explore Batch'}
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* STUDENT TESTIMONIALS */}
-      <section style={{ marginTop: '4rem' }}>
-        <div className="section-title-group">
-          <h2 className="main-sec-heading">
-            ⭐ {lang === 'hi' ? 'विद्यार्थियों का विश्वास (Student Reviews)' : 'Trusted by Thousands of Aspirants'}
-          </h2>
-          <p className="main-sec-sub">Read what UPSC aspirants and law learners say about Sanvidhan Mitra.</p>
-        </div>
-        <div className="testimonials-grid">
-          {TESTIMONIALS.map((t, idx) => (
-            <div key={idx} className="testimonial-card">
-              <div className="user-profile">
-                <img src={t.avatar} alt={t.name} className="user-avatar" />
-                <div>
-                  <h4 style={{ color: '#FFF', fontSize: '1rem', fontWeight: 700 }}>{t.name}</h4>
-                  <span style={{ color: 'var(--ed-saffron)', fontSize: '0.78rem', fontWeight: 600 }}>{t.role}</span>
-                </div>
-              </div>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem', fontStyle: 'italic' }}>
-                "{t.text}"
+        <div className="courses-list-grid">
+          {filteredCourses.map(c => (
+            <div key={c.id} className="course-item-card">
+              <span className="category-tag">{c.tag}</span>
+              <h3 className="course-item-title">
+                {lang === 'hi' ? c.title : c.titleEng}
+              </h3>
+              <p className="course-item-desc">
+                {lang === 'hi' ? c.description : c.descriptionEng}
               </p>
+              <div className="course-item-footer">
+                <span>⏱️ {c.duration} | 📖 {c.lessons}</span>
+                <button onClick={() => setSelectedCourse(c)} className="btn-drishti-primary" style={{ padding: '0.4rem 0.85rem', fontSize: '0.82rem' }}>
+                  {lang === 'hi' ? 'विवरण देखें' : 'View Details'}
+                </button>
+              </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* BATCH DETAIL MODAL */}
-      {selectedBatch && (
+      {/* COURSE MODAL */}
+      {selectedCourse && (
         <div style={{
           position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-          background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(10px)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2000, padding: '1.5rem'
+          background: 'rgba(0,0,0,0.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2000, padding: '1rem'
         }}>
-          <div className="quiz-card-wrapper" style={{ position: 'relative', width: '100%', maxWidth: '650px' }}>
-            <button
-              onClick={() => setSelectedBatch(null)}
-              style={{ position: 'absolute', top: '1rem', right: '1.25rem', background: 'none', border: 'none', color: '#FFF', fontSize: '1.5rem', cursor: 'pointer' }}
-            >
+          <div className="quiz-box-container" style={{ position: 'relative', width: '100%', maxWidth: '600px', margin: 0 }}>
+            <button onClick={() => setSelectedCourse(null)} style={{ position: 'absolute', top: '1rem', right: '1.25rem', background: 'none', border: 'none', fontSize: '1.4rem', cursor: 'pointer' }}>
               ✕
             </button>
-            <span className="batch-tag-pill" style={{ background: selectedBatch.tagColor, position: 'static', display: 'inline-block', marginBottom: '1rem' }}>
-              {selectedBatch.tag}
-            </span>
-            <h2 style={{ fontSize: '1.6rem', color: '#FFF', marginBottom: '0.5rem' }}>
-              {lang === 'hi' && selectedBatch.titleHindi ? selectedBatch.titleHindi : selectedBatch.title}
+            <h2 style={{ fontSize: '1.4rem', color: 'var(--drishti-red-dark)', marginBottom: '0.5rem' }}>
+              {lang === 'hi' ? selectedCourse.title : selectedCourse.titleEng}
             </h2>
-            <p style={{ color: 'var(--ed-saffron)', fontWeight: 600, fontSize: '0.92rem', marginBottom: '1rem' }}>
-              Instructor: {selectedBatch.instructor} ({selectedBatch.instructorTitle})
+            <p style={{ fontSize: '0.92rem', marginBottom: '1.25rem', color: 'var(--text-body)' }}>
+              {lang === 'hi' ? selectedCourse.description : selectedCourse.descriptionEng}
             </p>
-            <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
-              {lang === 'hi' && selectedBatch.descriptionHindi ? selectedBatch.descriptionHindi : selectedBatch.description}
-            </p>
-            <h4 style={{ color: '#FFF', marginBottom: '0.75rem' }}>📚 What You Will Get in this Batch:</h4>
-            <ul style={{ color: 'var(--text-primary)', paddingLeft: '1.2rem', marginBottom: '1.5rem' }}>
-              {selectedBatch.features.map((f, i) => (
-                <li key={i} style={{ marginBottom: '0.4rem' }}>{f}</li>
+            <h4 style={{ marginBottom: '0.5rem', color: 'var(--drishti-navy-dark)' }}>मुख्य विषय:</h4>
+            <ul style={{ paddingLeft: '1.25rem', marginBottom: '1.5rem', fontSize: '0.9rem' }}>
+              {selectedCourse.topics.map((t, idx) => (
+                <li key={idx} style={{ marginBottom: '0.3rem' }}>{t}</li>
               ))}
             </ul>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--border-light)', paddingTop: '1rem' }}>
-              <div>
-                <span style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--ed-emerald)' }}>FREE</span>
-                <span style={{ textDecoration: 'line-through', color: 'var(--text-muted)', marginLeft: '0.5rem' }}>{selectedBatch.originalPrice}</span>
-              </div>
-              <button onClick={() => { alert('Success! You have enrolled in this batch.'); setSelectedBatch(null); }} className="btn-cta-primary">
-                Confirm Free Enrollment
-              </button>
-            </div>
+            <button onClick={() => { alert('अध्ययन सामग्री एक्सेस की गई!'); setSelectedCourse(null); }} className="btn-drishti-primary" style={{ width: '100%', justifyContent: 'center' }}>
+              {lang === 'hi' ? 'अध्ययन सामग्री पढ़ना शुरू करें' : 'Start Reading'}
+            </button>
           </div>
         </div>
       )}
@@ -341,136 +229,115 @@ function Home({ lang, search, openAuthModal }) {
   );
 }
 
-function BatchesPage({ lang, search }) {
+function CoursesPage({ lang, search }) {
   return (
     <div>
-      <div className="section-title-group">
-        <h1 className="main-sec-heading">📚 {lang === 'hi' ? 'सभी कोर्सेस एवं बैचेस' : 'Complete Course Directory'}</h1>
-        <p className="main-sec-sub">Browse all structured batches for UPSC CSE, Law Examinations, and General Citizen Awareness.</p>
+      <div className="drishti-section-header">
+        <h1 className="drishti-section-title">📖 {lang === 'hi' ? 'सभी पाठ्यक्रम' : 'All Courses'}</h1>
       </div>
-      <Home lang={lang} search={search} openAuthModal={() => {}} />
+      <HomePage lang={lang} search={search} />
     </div>
   );
 }
 
-function TestSeriesPage({ lang }) {
-  const [questions, setQuestions] = useState(QUIZ_QUESTIONS_PW);
+function QuizPage({ lang }) {
   const [currentIdx, setCurrentIdx] = useState(0);
   const [selectedOpt, setSelectedOpt] = useState(null);
-  const [showExplanation, setShowExplanation] = useState(false);
+  const [showAnswer, setShowAnswer] = useState(false);
   const [score, setScore] = useState(0);
-  const [finished, setFinished] = useState(false);
+  const [completed, setCompleted] = useState(false);
 
-  const q = questions[currentIdx];
+  const q = QUIZ_DRISHTI[currentIdx];
 
-  const handleOptionClick = (idx) => {
-    if (showExplanation) return;
+  const handleSelect = (idx) => {
+    if (showAnswer) return;
     setSelectedOpt(idx);
   };
 
-  const handleCheckAnswer = () => {
+  const handleSubmit = () => {
     if (selectedOpt === null) return;
-    setShowExplanation(true);
+    setShowAnswer(true);
     if (selectedOpt === q.correct) {
       setScore(s => s + 1);
     }
   };
 
-  const handleNextQuestion = () => {
-    if (currentIdx + 1 < questions.length) {
+  const handleNext = () => {
+    if (currentIdx + 1 < QUIZ_DRISHTI.length) {
       setCurrentIdx(i => i + 1);
       setSelectedOpt(null);
-      setShowExplanation(false);
+      setShowAnswer(false);
     } else {
-      setFinished(true);
+      setCompleted(true);
     }
   };
 
   const handleRestart = () => {
     setCurrentIdx(0);
     setSelectedOpt(null);
-    setShowExplanation(false);
+    setShowAnswer(false);
     setScore(0);
-    setFinished(false);
+    setCompleted(false);
   };
 
-  if (finished) {
+  if (completed) {
     return (
-      <div className="quiz-card-wrapper" style={{ textAlign: 'center', padding: '3.5rem 2rem' }}>
-        <div style={{ fontSize: '3.5rem', marginBottom: '1rem' }}>🏆</div>
-        <h2 style={{ fontSize: '2.2rem', color: '#FFF', marginBottom: '0.5rem' }}>
-          {lang === 'hi' ? 'अभ्यास टेस्ट पूर्ण हुआ!' : 'Test Series Completed!'}
+      <div className="quiz-box-container" style={{ textAlign: 'center', padding: '3rem 2rem' }}>
+        <h2 style={{ fontSize: '1.8rem', color: 'var(--drishti-navy-dark)', marginBottom: '0.5rem' }}>
+          {lang === 'hi' ? 'अभ्यास क्विज़ पूर्ण हुआ' : 'Quiz Completed'}
         </h2>
-        <p style={{ fontSize: '1.35rem', color: 'var(--ed-saffron)', fontWeight: 700, marginBottom: '1.5rem' }}>
-          {lang === 'hi' ? `आपका स्कोर: ${score} / ${questions.length}` : `Final Score: ${score} out of ${questions.length}`}
+        <p style={{ fontSize: '1.2rem', color: 'var(--drishti-red)', fontWeight: 700, marginBottom: '1.5rem' }}>
+          {lang === 'hi' ? `आपका स्कोर: ${score} / ${QUIZ_DRISHTI.length}` : `Score: ${score} / ${QUIZ_DRISHTI.length}`}
         </p>
-        <button onClick={handleRestart} className="btn-cta-primary">
-          🔄 {lang === 'hi' ? 'पुनः टेस्ट दें' : 'Re-take Test'}
+        <button onClick={handleRestart} className="btn-drishti-primary">
+          🔄 {lang === 'hi' ? 'पुनः प्रयास करें' : 'Try Again'}
         </button>
       </div>
     );
   }
 
   return (
-    <div className="quiz-card-wrapper">
-      <div className="quiz-top-bar">
-        <div>
-          <span style={{ background: 'rgba(37, 99, 235, 0.2)', color: '#60A5FA', padding: '0.2rem 0.6rem', borderRadius: '4px', fontSize: '0.78rem', fontWeight: 800 }}>
-            {q.examTag}
-          </span>
-        </div>
-        <div style={{ fontWeight: 700, color: 'var(--ed-saffron)' }}>
-          Question {currentIdx + 1} of {questions.length} | Score: {score}
-        </div>
+    <div className="quiz-box-container">
+      <div className="quiz-header-bar">
+        <span>✍️ {lang === 'hi' ? 'दैनिक संविधान क्विज़' : 'Daily Polity Quiz'}</span>
+        <span>{lang === 'hi' ? `प्रश्न ${currentIdx + 1} / ${QUIZ_DRISHTI.length}` : `Question ${currentIdx + 1} of ${QUIZ_DRISHTI.length}`}</span>
       </div>
 
-      <h2 className="q-text">
-        {lang === 'hi' && q.questionHindi ? q.questionHindi : q.question}
+      <h2 className="question-heading">
+        {lang === 'hi' ? q.question : q.questionEng}
       </h2>
 
-      <div className="opt-list">
-        {q.options.map((opt, idx) => {
-          let btnClass = 'opt-btn-edtech';
+      <div className="options-list-group">
+        {(lang === 'hi' ? q.options : q.optionsEng).map((opt, idx) => {
+          let btnClass = 'option-item-btn';
           if (selectedOpt === idx) btnClass += ' selected';
-          if (showExplanation) {
-            if (idx === q.correct) btnClass += ' correct-ans';
-            else if (selectedOpt === idx) btnClass += ' wrong-ans';
+          if (showAnswer) {
+            if (idx === q.correct) btnClass += ' correct-option';
+            else if (selectedOpt === idx) btnClass += ' wrong-option';
           }
           return (
-            <button
-              key={idx}
-              onClick={() => handleOptionClick(idx)}
-              className={btnClass}
-              disabled={showExplanation}
-            >
-              <span style={{ width: '28px', height: '28px', borderRadius: '50%', background: 'rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.85rem' }}>
-                {String.fromCharCode(65 + idx)}
-              </span>
-              <span>{opt}</span>
+            <button key={idx} onClick={() => handleSelect(idx)} className={btnClass} disabled={showAnswer}>
+              <strong>{String.fromCharCode(65 + idx)}.</strong> {opt}
             </button>
           );
         })}
       </div>
 
-      {showExplanation && (
-        <div className="explanation-card">
-          <h4 style={{ color: '#6EE7B7', fontWeight: 800, marginBottom: '0.5rem' }}>
-            💡 Detailed Explanation & Supreme Court Citations:
-          </h4>
-          <p style={{ fontSize: '0.95rem', color: 'var(--text-primary)' }}>
-            {lang === 'hi' && q.explanationHindi ? q.explanationHindi : q.explanation}
-          </p>
+      {showAnswer && (
+        <div className="explanation-info-box">
+          <strong>💡 व्याख्या: </strong>
+          <span>{q.explanation}</span>
         </div>
       )}
 
-      <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem' }}>
-        {!showExplanation ? (
-          <button onClick={handleCheckAnswer} className="btn-cta-primary" disabled={selectedOpt === null}>
-            Submit Answer
+      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+        {!showAnswer ? (
+          <button onClick={handleSubmit} className="btn-drishti-primary" disabled={selectedOpt === null}>
+            {lang === 'hi' ? 'उत्तर की पुष्टि करें' : 'Submit'}
           </button>
         ) : (
-          <button onClick={handleNextQuestion} className="btn-cta-primary">
-            {currentIdx + 1 < questions.length ? 'Next Question ➡️' : 'View Test Result 🏆'}
+          <button onClick={handleNext} className="btn-drishti-primary">
+            {currentIdx + 1 < QUIZ_DRISHTI.length ? (lang === 'hi' ? 'अगला प्रश्न ➡️' : 'Next ➡️') : (lang === 'hi' ? 'परिणाम देखें' : 'View Result')}
           </button>
         )}
       </div>
@@ -478,77 +345,53 @@ function TestSeriesPage({ lang }) {
   );
 }
 
-function SaarthiAiPage({ lang }) {
+function DoubtSolverPage({ lang }) {
   const [messages, setMessages] = useState([
     { role: 'assistant', content: lang === 'hi'
-      ? 'नमस्ते! मैं आपका संविधान AI सारथी (24x7 Doubt Solver) हूँ। आप मुझसे UPSC पॉलिटी, अनुच्छेद 21, आरटीआई प्रक्रिया, POSH अधिनियम या किसी भी विधिक अधिकार पर प्रश्न पूछ सकते हैं।'
-      : 'Welcome to Sanvidhan AI Saarthi (24x7 Instant Doubt Solver)! Ask any question on Indian Polity, Articles, RTI Act, or Constitutional Rights.' }
+      ? 'नमस्कार! यह संविधान प्रश्न उत्तर केंद्र है। आप भारतीय संविधान, अनुच्छेदों या नागरिक अधिकारों से संबंधित अपना प्रश्न यहां पूछ सकते हैं।'
+      : 'Welcome! You can ask any question regarding Indian Constitution, Articles, or RTI rights here.' }
   ]);
   const [input, setInput] = useState('');
-  const [isTyping, setIsTyping] = useState(false);
 
-  const handleSend = (text) => {
-    const query = text || input;
-    if (!query.trim()) return;
-
+  const handleSend = () => {
+    if (!input.trim()) return;
+    const query = input;
     setMessages(prev => [...prev, { role: 'user', content: query }]);
     setInput('');
-    setIsTyping(true);
 
     setTimeout(() => {
-      setIsTyping(false);
-      const reply = getAiDoubtAnswer(query);
-      setMessages(prev => [...prev, { role: 'assistant', content: reply }]);
-    }, 500);
+      const answer = getSimpleAnswer(query);
+      setMessages(prev => [...prev, { role: 'assistant', content: answer }]);
+    }, 400);
   };
 
   return (
-    <div className="saarthi-container">
-      <div className="saarthi-topbar">
-        <div className="saarthi-title">
-          <span>🤖 SANVIDHAN AI SAARTHI</span>
-          <span style={{ fontSize: '0.72rem', background: 'rgba(16, 185, 129, 0.2)', color: '#10B981', padding: '0.15rem 0.5rem', borderRadius: '4px', textTransform: 'uppercase' }}>
-            ONLINE 24X7
-          </span>
-        </div>
-        <button onClick={() => setMessages([])} style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', fontSize: '0.85rem' }}>
-          🗑️ Clear Chat
+    <div className="doubt-box-container">
+      <div className="doubt-header">
+        <span>💬 {lang === 'hi' ? 'प्रश्न समाधान एवं संशय निवारण' : 'Constitution Doubt Solver'}</span>
+        <button onClick={() => setMessages([])} style={{ background: 'none', border: 'none', color: '#FFF', cursor: 'pointer', fontSize: '0.85rem' }}>
+          🗑️ {lang === 'hi' ? 'साफ़ करें' : 'Clear'}
         </button>
       </div>
 
-      <div className="saarthi-chat-area">
-        {messages.map((m, i) => (
-          <div key={i} className={`bubble ${m.role === 'user' ? 'bubble-user' : 'bubble-ai'}`}>
+      <div className="doubt-messages-area">
+        {messages.map((m, idx) => (
+          <div key={idx} className={`msg-bubble ${m.role === 'user' ? 'msg-user' : 'msg-assistant'}`}>
             {m.content}
           </div>
         ))}
-        {isTyping && (
-          <div className="bubble bubble-ai" style={{ fontStyle: 'italic', opacity: 0.8 }}>
-            ⚡ Sanvidhan Saarthi is retrieving constitutional articles...
-          </div>
-        )}
       </div>
 
-      <div style={{ padding: '0.5rem 1.25rem', display: 'flex', gap: '0.5rem', overflowX: 'auto', background: 'rgba(15,23,42,0.6)' }}>
-        {['Article 21 Rights', 'How to file RTI?', 'What is Article 14?', 'POSH Act Details'].map((q, idx) => (
-          <button key={idx} onClick={() => handleSend(q)} className="tab-btn" style={{ fontSize: '0.78rem', padding: '0.3rem 0.75rem' }}>
-            {q}
-          </button>
-        ))}
-      </div>
-
-      <div className="saarthi-input-row">
+      <div className="doubt-input-form">
         <input
           type="text"
-          className="header-search"
-          style={{ flex: 1, maxWidth: '100%' }}
           value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-          placeholder={lang === 'hi' ? 'पॉलिटी या संविधान का कोई भी प्रश्न पूछें...' : 'Ask any polity doubt (e.g. Article 21, RTI, Writs)...'}
+          onChange={e => setInput(e.target.value)}
+          onKeyDown={e => e.key === 'Enter' && handleSend()}
+          placeholder={lang === 'hi' ? 'अपना प्रश्न यहां लिखें (उदा: अनुच्छेद 21 क्या है?)...' : 'Type your question...'}
         />
-        <button onClick={() => handleSend()} className="btn-cta-primary">
-          Send
+        <button onClick={handleSend} className="btn-drishti-primary">
+          {lang === 'hi' ? 'पूछें' : 'Ask'}
         </button>
       </div>
     </div>
@@ -556,152 +399,75 @@ function SaarthiAiPage({ lang }) {
 }
 
 function PreamblePage({ lang }) {
-  const pData = PREAMBLE_TEXTS[lang] || PREAMBLE_TEXTS.en;
+  const p = PREAMBLE_SIMPLE[lang] || PREAMBLE_SIMPLE.hi;
   return (
-    <div className="quiz-card-wrapper" style={{ maxWidth: '850px', padding: '3rem 2.5rem' }}>
-      <div style={{ textAlign: 'center', borderBottom: '1px solid var(--border-light)', paddingBottom: '1.5rem', marginBottom: '2rem' }}>
-        <h1 style={{ fontFamily: 'var(--font-serif)', color: 'var(--ed-saffron)', fontSize: '2.4rem' }}>
-          {pData.heading}
+    <div className="quiz-box-container" style={{ maxWidth: '850px' }}>
+      <div style={{ textAlign: 'center', borderBottom: '2px solid var(--drishti-red)', paddingBottom: '1rem', marginBottom: '1.5rem' }}>
+        <h1 style={{ color: 'var(--drishti-red-dark)', fontSize: '2rem', fontWeight: 800 }}>
+          {p.heading}
         </h1>
-        <h3 style={{ letterSpacing: '2px', color: '#FDE047', fontSize: '1.25rem', marginTop: '0.4rem' }}>
-          {pData.subheading}
+        <h3 style={{ color: 'var(--drishti-navy-dark)', fontSize: '1.15rem' }}>
+          {p.subheading}
         </h3>
       </div>
-
-      <p style={{ fontSize: '1.15rem', fontStyle: 'italic', marginBottom: '2rem', lineHeight: '1.8', color: '#FFF' }}>
-        "{pData.text}"
-      </p>
-
-      <div style={{ display: 'grid', gap: '1rem', marginBottom: '2.5rem' }}>
-        {[
-          { key: 'JUSTICE (न्याय)', text: pData.justice },
-          { key: 'LIBERTY (स्वतंत्रता)', text: pData.liberty },
-          { key: 'EQUALITY (समता)', text: pData.equality },
-          { key: 'FRATERNITY (बंधुता)', text: pData.fraternity }
-        ].map((item, idx) => (
-          <div key={idx} style={{ background: 'rgba(255, 153, 51, 0.06)', borderLeft: '4px solid var(--ed-saffron)', padding: '1rem 1.25rem', borderRadius: '4px' }}>
-            <strong style={{ color: 'var(--ed-saffron)', display: 'block', marginBottom: '0.2rem' }}>{item.key}</strong>
-            <span style={{ color: 'var(--text-secondary)' }}>{item.text}</span>
-          </div>
-        ))}
-      </div>
-
-      <p style={{ textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.92rem', borderTop: '1px solid var(--border-light)', paddingTop: '1.5rem' }}>
-        {pData.date}
-      </p>
-    </div>
-  );
-}
-
-function AuthModal({ isOpen, onClose, lang }) {
-  const [email, setEmail] = useState('');
-  if (!isOpen) return null;
-
-  return (
-    <div style={{
-      position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-      background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(10px)',
-      display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 3000, padding: '1rem'
-    }}>
-      <div className="quiz-card-wrapper" style={{ width: '100%', maxWidth: '420px', position: 'relative', textAlign: 'center' }}>
-        <button
-          onClick={onClose}
-          style={{ position: 'absolute', top: '1rem', right: '1.25rem', background: 'none', border: 'none', color: '#FFF', fontSize: '1.5rem', cursor: 'pointer' }}
-        >
-          ✕
-        </button>
-        <h2 style={{ fontSize: '1.75rem', color: '#FFF', marginBottom: '0.5rem' }}>
-          {lang === 'hi' ? 'संविधान मित्र में आपका स्वागत है' : 'Student Login & Signup'}
-        </h2>
-        <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '1.5rem' }}>
-          Join 150,000+ students learning Indian Polity & Fundamental Rights
-        </p>
-
-        <input
-          type="email"
-          placeholder="Enter Email / Phone Number"
-          className="header-search"
-          style={{ width: '100%', marginBottom: '1rem', padding: '0.8rem 1rem' }}
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-
-        <button
-          onClick={() => { alert('OTP Sent! Demo Login successful.'); onClose(); }}
-          className="btn-cta-primary"
-          style={{ width: '100%', justifyContent: 'center', padding: '0.85rem' }}
-        >
-          Continue with Email / OTP
-        </button>
+      <div style={{ fontSize: '1.05rem', lineHeight: '1.8', whiteSpace: 'pre-wrap', color: 'var(--text-dark)' }}>
+        {p.body}
       </div>
     </div>
   );
 }
 
 function App() {
-  const [lang, setLang] = useState('en');
+  const [lang, setLang] = useState('hi');
   const [search, setSearch] = useState('');
-  const [authModalOpen, setAuthModalOpen] = useState(false);
 
   return (
     <Router>
-      <NoticeBar lang={lang} />
-      <Header
-        lang={lang}
-        setLang={setLang}
-        search={search}
-        setSearch={setSearch}
-        openAuthModal={() => setAuthModalOpen(true)}
-      />
+      <TopStrip lang={lang} setLang={setLang} />
+      <MainHeader lang={lang} search={search} setSearch={setSearch} />
 
-      <main className="edtech-wrapper">
+      <main className="drishti-main-content">
         <Routes>
-          <Route path="/" element={<Home lang={lang} search={search} openAuthModal={() => setAuthModalOpen(true)} />} />
-          <Route path="/batches" element={<BatchesPage lang={lang} search={search} />} />
-          <Route path="/test-series" element={<TestSeriesPage lang={lang} />} />
-          <Route path="/saarthi-ai" element={<SaarthiAiPage lang={lang} />} />
+          <Route path="/" element={<HomePage lang={lang} search={search} />} />
+          <Route path="/courses" element={<CoursesPage lang={lang} search={search} />} />
+          <Route path="/quiz" element={<QuizPage lang={lang} />} />
+          <Route path="/doubt-solver" element={<DoubtSolverPage lang={lang} />} />
           <Route path="/preamble" element={<PreamblePage lang={lang} />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
 
-      <AuthModal isOpen={authModalOpen} onClose={() => setAuthModalOpen(false)} lang={lang} />
-
-      <footer className="edtech-footer">
-        <div className="footer-grid">
+      <footer className="drishti-footer">
+        <div className="footer-container">
           <div>
-            <h3 style={{ color: '#FFF', fontSize: '1.2rem', fontWeight: 800, marginBottom: '0.8rem' }}>
-              SANVIDHAN MITRA 📜
-            </h3>
-            <p style={{ fontSize: '0.88rem', lineHeight: '1.6', color: 'var(--text-secondary)' }}>
-              India's premier EdTech & Constitutional literacy platform modeled for UPSC aspirants, legal scholars, and every citizen of India.
+            <h3 style={{ color: '#FFF', fontSize: '1.2rem', marginBottom: '0.5rem' }}>संविधान मित्र 📜</h3>
+            <p style={{ fontSize: '0.85rem', lineHeight: '1.6' }}>
+              भारतीय संविधान और नागरिक अधिकारों के अध्ययन हेतु समर्पित मंच।
             </p>
           </div>
           <div>
-            <h4 className="footer-col-title">Batches & Courses</h4>
-            <ul className="footer-links">
-              <li><Link to="/batches">UPSC CSE Polity 2026</Link></li>
-              <li><Link to="/batches">Fundamental Rights</Link></li>
-              <li><Link to="/batches">RTI Act 2005 Masterclass</Link></li>
-              <li><Link to="/batches">Women Safety & POSH Act</Link></li>
+            <h4 className="footer-col-title">मुख्य पृष्ठ</h4>
+            <ul className="footer-link-list">
+              <li><Link to="/">गृह (Home)</Link></li>
+              <li><Link to="/courses">पाठ्यक्रम (Courses)</Link></li>
+              <li><Link to="/quiz">डेली क्विज़ (Quiz)</Link></li>
             </ul>
           </div>
           <div>
-            <h4 className="footer-col-title">Free Resources</h4>
-            <ul className="footer-links">
-              <li><Link to="/test-series">Daily Prelims Test Series</Link></li>
-              <li><Link to="/saarthi-ai">AI Saarthi Doubt Solver</Link></li>
-              <li><Link to="/preamble">Preamble & Articles Vault</Link></li>
+            <h4 className="footer-col-title">संसाधन</h4>
+            <ul className="footer-link-list">
+              <li><Link to="/doubt-solver">प्रश्न समाधान</Link></li>
+              <li><Link to="/preamble">संविधान की प्रस्तावना</Link></li>
             </ul>
           </div>
           <div>
-            <h4 className="footer-col-title">Support & Helpline</h4>
-            <p style={{ fontSize: '0.85rem', marginBottom: '0.5rem' }}>📞 Helpline: 1800-SANVIDHAN (Toll Free)</p>
-            <p style={{ fontSize: '0.85rem' }}>✉️ Email: support@sanvidhanmitra.in</p>
+            <h4 className="footer-col-title">संपर्क</h4>
+            <p>📞 हेल्पलाइन: 1800-200-1010</p>
+            <p>✉️ ईमेल: support@sanvidhanmitra.in</p>
           </div>
         </div>
-        <div style={{ textAlign: 'center', borderTop: '1px solid var(--border-light)', paddingTop: '1.5rem' }}>
-          <p>© 2026 Sanvidhan Mitra. All Rights Reserved. Empowering Democracy through Education. 🇮🇳</p>
+        <div style={{ textAlign: 'center', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '1rem' }}>
+          <p>© 2026 संविधान मित्र | सर्वाधिकार सुरक्षित। 🇮🇳</p>
         </div>
       </footer>
     </Router>
